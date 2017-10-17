@@ -26,4 +26,10 @@ export class CourseService {
             return courses;
         });
     }
+
+    getCourse(crn: String) {
+        return this.http.get(this._baseURL + `/course/${crn}`, this.helperService.jwt()).map((res: Response) => {
+            return new Course(res.json());
+        });
+    }
 }

@@ -9,6 +9,7 @@ import { Course } from '../_models';
 })
 export class HomeComponent implements OnInit {
   courses: Course[] = [];
+  specificCourse: Course = new Course();
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -23,6 +24,18 @@ export class HomeComponent implements OnInit {
       },
       error => {
         this.alertService.error("Unidentified error occurred");
+        console.log(error);
+      }
+    )
+  }
+
+  getSpecificCourse(event) {
+    let crn = event.target.value;
+
+    this.courseService.getCourse(crn).subscribe(
+      data => { this.specificCourse = data },
+      error => {
+        this.alertService.error(error);
         console.log(error);
       }
     )

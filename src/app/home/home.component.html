@@ -4,8 +4,12 @@
 
 
 <pre>
-  {{ courses | json }}
+  {{ specificCourse | json }}
 </pre>
 
 
 <a routerLink="/login">Logout</a>
+
+
+<label for="getSpecificCourse">Enter CRN</label>  
+<input type="text" name="getSpecificCourse" (keyup.enter)="getSpecificCourse($event)">
