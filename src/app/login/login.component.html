@@ -1,0 +1,17 @@
+<div class="background-image">
+  <div class="overlay-left"></div>
+  <div class="overlay-right">
+    <img class="img-responsive" src="./assets/MGSULogo.png" alt="MGSU Logo">
+    <form name="login-form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+      <label for="user">Email: </label>
+      <input id="user" [(ngModel)]="model.email" type="email" name="email" #email="ngModel" required="required">
+      <div *ngIf="f.submitted && !email.valid" class="error">Email is required</div>
+      <br>
+      <label for="pass">Password: </label>
+      <input id="pass" type="password" [(ngModel)]="model.password" #password="ngModel" name="password" required="required">
+      <div *ngIf="f.submitted && !password.valid" class="error">Password is required</div>
+      <br>
+      <button type="submit" class="button">Login</button>
+    </form>
+  </div>
+</div>

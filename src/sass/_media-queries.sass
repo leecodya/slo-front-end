@@ -1,0 +1,16 @@
+//media queries breakpoints
+@mixin large-phone
+    @media only screen and (max-width: 500px)
+        @content
+
+@mixin tablet
+    @media only screen and (max-width: 768px)
+        @content
+
+@mixin large-tablet
+    @media only screen and (max-width: 900px)
+        @content
+
+@mixin desktop
+    @media only screen and (max-width: 1200px)
+        @content
