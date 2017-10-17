@@ -1,0 +1,24 @@
+@import 'variables'
+@import 'media-queries'
+
+.alert
+    font-family: $f
+    font-weight: 500
+    font-size: 16px
+    padding: 15px 20px
+    color: #333
+    background-color: white
+    position: absolute
+    z-index: 1
+    top: 0
+    left: 0
+    right: 0
+    
+    &.alert-success
+        background-color: #DFF2BF
+    
+    &.alert-danger
+        background-color: #FFBABA
+
+    +large-tablet
+        font-size: 14px

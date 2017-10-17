@@ -6,15 +6,18 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { AlertComponent } from './_directives/alert/alert.component';
 
 import { AuthGuard } from './_guards/auth.guard';
-import { AuthenticationService, HelperService } from './_services/';
+import { AuthenticationService, HelperService, AlertService, CourseService } from './_services/';
+
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     HomeComponent,
     LoginComponent
   ],
@@ -28,7 +31,9 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [
     AuthGuard,
+    AlertService,
     AuthenticationService,
+    CourseService,
     HelperService
   ],
   bootstrap: [AppComponent]

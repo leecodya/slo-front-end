@@ -3,12 +3,10 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
 
 import { environment } from '../../environments/environment';
-declare var google: any;
 
 @Injectable()
 export class HelperService {
     _baseURL: string = environment.api;
-    geocoder = new google.maps.Geocoder();
 
     constructor(private http: Http) { }
 
