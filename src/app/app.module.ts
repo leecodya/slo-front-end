@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_directives/alert/alert.component';
+import { MenuComponent } from './_directives/menu/menu.component';
 
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthenticationService, HelperService, AlertService, CourseService } from './_services/';
@@ -18,6 +19,7 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     AlertComponent,
+    MenuComponent,
     HomeComponent,
     LoginComponent
   ],

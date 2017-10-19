@@ -7,15 +7,18 @@
       </div>
 
       <form (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+        <alert></alert>
         <div class="form-group">
-          <input class="email" type="email" [(ngModel)]="model.email" name="email" placeholder="Email" #email="ngModel" required="required">
           <div *ngIf="f.submitted && !email.valid" class="error">Email is required</div>
+          <input class="email" type="email" [(ngModel)]="model.email" name="email" placeholder="Email" autofocus #email="ngModel" required="required">
         </div>
         <div class="form-group">
-          <input class="password" type="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password" name="password" required="required">
           <div *ngIf="f.submitted && !password.valid" class="error">Password is required</div>
+          <input class="password" type="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password" name="password" required="required">
         </div>
-        <button type="submit">Submit</button>
+        <div class="form-group">
+          <button type="submit">Login</button>
+        </div>
       </form>
     </div>
 </div>

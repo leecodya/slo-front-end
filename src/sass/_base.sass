@@ -8,6 +8,42 @@ body, html
 .form-group
     
     label
-        font-size: 16px
+        font-family: $f
         color: white
         display: block
+    
+    input
+        font-family: $f
+        width: 250px
+        font-size: 14px
+        font-weight: 400
+        padding: 10px 11px
+        border: 0
+        background-color: $c-form-bg
+        border: 1px solid $c-button
+        color: white
+
+        &:focus
+            border: 1px solid $c-form-border-active
+    
+    button
+        background-color: $c-button
+        color: white
+        font-family: $f
+        font-size: 14px
+        font-weight: 500
+        text-align: center
+        padding: 15px 15px
+        margin-top: 15px
+
+        &:hover, &:active, &:focus
+            background-color: $c-button-active
+            cursor: pointer
+    
+    .error
+        font-size: 12px
+        font-weight: 400
+        color: $c-error
+        text-align: left
+        margin-bottom: 10px
+        margin-top: 5px
