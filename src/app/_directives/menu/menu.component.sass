@@ -1,0 +1,44 @@
+@import 'variables'
+
+.menu-container
+    max-width: 950px
+    margin: 0 auto
+    height: 130px
+
+    nav
+        float: right
+        font-size: 17px
+        margin-top: 40px
+        font-weight: 500
+
+        a:not(.button)
+            color: rgba(255, 255, 255, .5)
+            position: relative
+            margin-right: 14px
+
+            &:after
+                content: ""
+                display: inline-block
+                position: absolute
+                bottom: -5px
+                background-color: white
+                width: 0
+                height: 2px
+                left: 0
+                transition: all .2s ease
+
+            &:hover, &.is-active
+                color: white
+
+                &:after
+                    width: 100%
+
+        .button
+            color: rgba(255, 255, 255, .5)
+            background-color: $c-button
+            padding: 13px 20px
+            border-radius: 3px
+
+            &:hover, &:focus
+                color: white
+                background-color: $c-button-active

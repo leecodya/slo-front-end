@@ -2,7 +2,8 @@
     <div class="content-container">
         <h1 [routerLink]="['/home']">Logo Here</h1>
         <nav>
-            <a [routerLink]="['/home']">Home</a>
+            <a [routerLink]="['/home']" [routerLinkActive]="'is-active'">Home</a>
+            <a [routerLink]="['/admin']" [routerLinkActive]="'is-active'">Admin</a>
             <a [routerLink]="['/login']" class="button">Logout</a>
         </nav>
     </div>
