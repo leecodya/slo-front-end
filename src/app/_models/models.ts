@@ -4,7 +4,6 @@ export class Course {
     course_type: String;
     semester: String;
     course_year: Date;
-    comments: String;
     faculty: Faculty;
     completion: Boolean;
     slos: SLO[];
@@ -53,6 +52,7 @@ export class Student {
 export  class SLO {
     slo_id: String;
     slo_description: String;
+    comments: String;
 
     constructor(init?: Partial<SLO>) {
         Object.assign(this, init);

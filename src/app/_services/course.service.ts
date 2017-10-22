@@ -32,4 +32,30 @@ export class CourseService {
             return new Course(res.json());
         });
     }
+
+    createCourse(course: Course) {
+        let assigned_slos = [];
+        course.slos.forEach(sloObject => {
+            assigned_slos.push({
+                slo_id: sloObject.slo_id,
+                comments: null
+            });
+        });
+
+        let courseData = {
+            crn: course.crn,
+            faculty_id: course.faculty.faculty_id,
+            course_name: course.course_name,
+            course_type: course.course_type,
+            semester: course.semester,
+            course_year: Math.floor(course.course_year.valueOf() / 1000),
+            slos: assigned_slos
+        }
+
+        console.log(courseData);
+
+        return this.http.post(this._baseURL + '/courses', courseData, this.helperService.jwt()).map((res: Response) => {
+            return res.json();
+        });
+    }
 }

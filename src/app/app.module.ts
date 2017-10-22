@@ -10,7 +10,7 @@ import { AlertComponent } from './_directives/alert/alert.component';
 import { MenuComponent } from './_directives/menu/menu.component';
 
 import { AuthGuard } from './_guards/auth.guard';
-import { AuthenticationService, HelperService, AlertService, CourseService } from './_services/';
+import { AuthenticationService, HelperService, AlertService, CourseService, SLOService } from './_services/';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -36,6 +36,7 @@ import { LoginComponent } from './login/login.component';
     AlertService,
     AuthenticationService,
     CourseService,
+    SLOService,
     HelperService
   ],
   bootstrap: [AppComponent]

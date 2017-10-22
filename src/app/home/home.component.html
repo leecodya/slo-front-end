@@ -15,4 +15,85 @@
       <p class="course-data"><span>{{ course.crn }} -</span> SLO #1, #2</p>
     </div>
   </div>
+  <div *ngIf="loading_courses" class="loader">
+      <p class="loading-text">Loading your course data...</p>
+      <div id="progress-bar">
+        <div id="loadingProgressG_1" class="progress-bar"></div>
+      </div>
+  </div>
+</section>
+
+<section class="new-assessment cf">
+  <div class="section-header">
+    <a class="active">Start New Assessment</a>
+  </div>
+
+  <aside>
+    <h1>Ready to Start?</h1>
+    <p>To begin a new Student Learning Objective let’s start by creating a new class.</p>
+  </aside>
+
+  <div class="content cf">
+      <form class="new-assessment-form" [formGroup]="form.getForm()" (ngSubmit)="form.isValid() && submit()" novalidate>
+        <alert></alert>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="crn">Course Number</label>
+            <input type="text" formControlName="crn" name="crn" placeholder="12345" size="10">
+            <div *ngIf="form.hasError('crn')" class="error">5 digit number</div>
+          </div>
+          <div class="form-group">
+            <label for="semester">Semester</label>
+            <select name="semester" formControlName="semester">
+              <option value="Fall">Fall</option>
+              <option value="Spring">Spring</option>
+              <option value="Summer">Summer</option>
+            </select>
+            <div *ngIf="form.hasError('semester')" class="error">Required</div>
+          </div>
+          <div class="form-group">
+            <label for="year">Year</label>
+            <input type="text" formControlName="course_year" placeholder="2017" size="8">
+            <div *ngIf="form.hasError('course_year')" class="error">4 digit year</div>
+          </div>
+          <div class="form-group">
+            <label for="type">Course Type</label>
+            <select name="type" formControlName="course_type">
+              <option value="F2F">Face-to-Face</option>
+              <option value="Online">Online</option>
+            </select>
+            <div *ngIf="form.hasError('semester')" class="error">Required</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="title">Course Title</label>
+            <input type="text" formControlName="course_name" placeholder="Forensics and Data Recovery" size="64">
+            <div *ngIf="form.hasError('course_name')" class="error">Required</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="section-label">Select SLOs</label>
+          <div *ngFor="let slo of slos" class="slo-option cf">
+            <input type="checkbox" value="{{ slo.slo_id }}" id="SLO_{{ slo.slo_id }}" (change)="selectSLO(slo, $event)">
+            <label for="SLO_{{ slo.slo_id }}">SLO {{ slo.slo_id }} - {{ slo.slo_description }}</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <button type="submit" class="button">Submit</button>
+          </div>
+        </div>
+      </form>
+  </div>
+
+  <div *ngIf="loading_courses" class="loader">
+      <p class="loading-text">Loading slo information...</p>
+      <div id="progress-bar">
+        <div id="loadingProgressG_1" class="progress-bar"></div>
+      </div>
+  </div>
 </section>
