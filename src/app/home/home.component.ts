@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, CourseService, AlertService } from '../_services';
-import { Course } from '../_models';
+import { Course, Faculty } from '../_models';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,9 @@ import { Course } from '../_models';
 })
 export class HomeComponent implements OnInit {
   courses: Course[] = [];
-  specificCourse: Course = new Course();
+  visibleCourses: Course[] = [];
+  faculty: Faculty = new Faculty();
+  currentSection: String = "complete";
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -21,6 +23,9 @@ export class HomeComponent implements OnInit {
     this.courseService.getCourses().subscribe(
       data => {
         this.courses = data;
+        this.visibleCourses = this.courses.filter(x => !x.completion);
+        this.faculty = this.courses[0].faculty;
+        console.log(this.visibleCourses);
       },
       error => {
         this.alertService.error("Unidentified error occurred");
@@ -29,16 +34,15 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  getSpecificCourse(event) {
-    let crn = event.target.value;
-
-    this.courseService.getCourse(crn).subscribe(
-      data => { this.specificCourse = data },
-      error => {
-        this.alertService.error(error);
-        console.log(error);
-      }
-    )
+  loadSection(section) {
+    if (section == 'complete') {
+      this.visibleCourses = this.courses.filter(x => x.completion);
+      this.currentSection = 'complete';
+    }
+    else if (section == 'incomplete') {
+      this.visibleCourses = this.courses.filter(x => !x.completion);
+      this.currentSection = 'incomplete';
+    }
   }
 
 }

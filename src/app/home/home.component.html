@@ -1,14 +1,18 @@
 <menu-bar></menu-bar>
 
-
-<pre>
-  {{ specificCourse | json }}
-</pre>
-
-<alert></alert>
-
-
-
-
-<label for="getSpecificCourse">Enter CRN</label>  
-<input type="text" name="getSpecificCourse" (keyup.enter)="getSpecificCourse($event)">
+<section class="courses cf">
+  <div class="section-header">
+    <a (click)="loadSection('complete')" [ngClass]="{ active: currentSection == 'complete' }">Complete</a>
+    <a (click)="loadSection('incomplete')" [ngClass]="{ active: currentSection == 'incomplete' }">Incomplete</a>
+  </div>
+  <aside>
+    <h1>Hi {{ faculty.first_name }} {{ faculty.last_name }}.</h1>
+    <p>These are your completed assessments. You don’t need to do anything else for these classes.</p>
+  </aside>
+  <div class="content cf">
+    <div *ngFor="let course of visibleCourses" class="course-card" [routerLink]="['/assessment', course.crn]">
+      <h3 class="course-title">{{ course.course_type }} {{ course.course_name }}</h3>
+      <p class="course-data"><span>{{ course.crn }} -</span> SLO #1, #2</p>
+    </div>
+  </div>
+</section>

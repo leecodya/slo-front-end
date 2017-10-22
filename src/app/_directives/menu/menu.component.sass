@@ -3,12 +3,15 @@
 .menu-container
     max-width: 950px
     margin: 0 auto
-    height: 130px
+    height: 150px
+
+    .logo
+        margin-top: 50px
 
     nav
         float: right
-        font-size: 17px
-        margin-top: 40px
+        font-size: 16px
+        margin-top: 65px
         font-weight: 500
 
         a:not(.button)
@@ -32,13 +35,3 @@
 
                 &:after
                     width: 100%
-
-        .button
-            color: rgba(255, 255, 255, .5)
-            background-color: $c-button
-            padding: 13px 20px
-            border-radius: 3px
-
-            &:hover, &:focus
-                color: white
-                background-color: $c-button-active

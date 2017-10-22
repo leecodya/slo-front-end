@@ -6,6 +6,7 @@ export class Course {
     course_year: Date;
     comments: String;
     faculty: Faculty;
+    completion: Boolean;
     slos: SLO[];
     students: Student[];
 
