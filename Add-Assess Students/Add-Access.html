@@ -1,0 +1,226 @@
+<html>
+    <head>
+        <link rel = "stylesheet" href = "add-access.css">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body class = "bg">
+        <div class = "container">
+            <div class = "nav">
+                <nav class="myNav">
+                    <!-- logo -->
+                    <a href = "">Home</a> | 
+                    <a href = "">Logout</a>
+                </nav>
+            </div><br><br>
+            <div class = "main">
+                <fieldset>
+                    <legend>Your Class</legend>
+                    <div class = "intro">
+                        <h2>This is Your Class.</h2>
+                        <br>
+                        <p>You are working on completing assessments for this class. Closing this page at any point will automatically save your information.</p>
+                    </div>
+                    <div class = "classes">
+                            <p><span style="color:#633393">Bacon ipsum dolor amet shank porchetta short loin shoulder, kevin pastrami tongue beef short ribs turkey tail. Rump tongue bacon drumstick leberkas tri-tip short loin jowl picanha shoulder ham hock beef ribs.</span></p>
+                    </div>
+                </fieldset>
+            </div>
+            <br>
+            <div class = "main2">
+				<nav>
+					<ul class="nav nav-tabs">
+						<li><a data-toggle="tab" href="#add">Add Students</a></li>
+						<li><a data-toggle="tab" href="#access">Access Students</a></li>
+						<li><a data-toggle="tab" href="#comments">Leave Comments</a></li>
+					</ul>
+				</nav>
+				<div class="tab-content">
+					<div id="add" class="tab-pane fade in active">
+						<fieldset>
+							<div class = "intro">
+								<h2>Let's Add Your Students.</h2>
+								<br>
+								<p>To access your students, first add them to your class. When you have added all your students, press nect below.</p>
+								<p>Pro-tip: Use enter key to add the student and start from the beginning.</p>
+								<button class = "next">Next - Access Your Students</button>
+							</div>
+							<div class = "slo">
+								<form>
+									<table>
+										<tr>
+											<th>
+												Student Number
+											</th>
+											<th>
+												First Name
+											</th>
+											<th>
+												Last Name
+											</th>
+										</tr>
+										<tr>
+											<td>
+												<input type = "text">
+											</td>
+											<td>
+												<input type = "text">
+											</td>
+											<td>
+												<input type = "text">
+											</td>                                    
+										</tr>
+										<tr>
+											<td>
+												<button class = "submit">Submit</button>
+											</td>
+										</tr>
+									</table>
+									<br><br>                            
+								</form> 
+								<div>
+									<fieldset>
+										<legend>Your Students</legend>
+										<p><span style="color:#633393">Bacon ipsum dolor amet shank porchetta short loin shoulder, kevin pastrami tongue beef short ribs turkey tail.</span></p>
+									</fieldset>
+								</div>
+							</div><br>
+						</fieldset>
+					</div>
+					<div id="access" class="tab-pane fade in">
+						<fieldset>
+							<div class = "intro">
+								<h2>Let's Access Students.</h2>
+								<br>
+								<p>Finally, let's access your students for this class. You've selected <span style="color:#633393"><b>2</b></span> SLOs and you have <span style="color:#633393"><b>2</b></span> students, so you'll need to complete <span style="color:#633393"><b>4</b></span> Assessments.</p>
+								<p><span style="color:#633393"><b>00/04</b></span> Completed</p>
+								<button>Submit Assessments</button>
+							</div>
+							<div class = "slo"> 
+								<div>
+									<fieldset>
+										<legend>Currently Assessing</legend>
+										<p><span style="color:#633393"><b>983198987 - Michael Lawrence</b></span></p>
+									</fieldset>
+									<br>
+									<fieldset>
+										<legend><span style="color:#633393"><b>SLO 1 - Identify and apply current technical concepts in the cor information technologies.</b></span></legend>
+										<form>
+											<table class="perfID">
+												<tr>
+													<td>
+														Analyze an Information System
+													</td>
+													<td>
+														<input type = "text" size="5">
+													</td>													
+												</tr>
+												<tr>
+													<td>
+														Design and Develop an Information System
+													</td>
+													<td>
+														<input type = "text" size="5">
+													</td>													
+												</tr>
+												<tr>
+													<td>
+														Implement an Information System
+													</td>
+													<td>
+														<input type = "text" size="5">
+													</td>													
+												</tr>
+												<tr>
+													<td>
+														Evaluate an Information System
+													</td>
+													<td>
+														<input type = "text" size="5">
+													</td>													
+												</tr>
+												<tfoot>
+													<tr>
+														<td>Total</td>
+														<td><label><span style="color:633393"><b>{{total}}</b></span></label></td>
+													</tr>
+												</tfoot>
+											</table>
+											<br>                            
+										</form>
+									</fieldset>
+									<fieldset>
+										<legend><span style="color:#633393"><b>SLO 2 - Design, Implement, and administer effective IT solutions based on user requirements.</b></span></legend>
+										<form>
+											<table class="perfID">
+												<tr>
+													<td>
+														Design an effective IT solution based on user requirements
+													</td>
+													<td>
+														<input type = "text" size="5">
+													</td>													
+												</tr>
+												<tr>
+													<td>
+														Implement and administer an effective IT solution based on user requirements
+													</td>
+													<td>
+														<input type = "text" size="5">
+													</td>													
+												</tr>
+												<tfoot>
+													<tr>
+														<td>Total</td>
+														<td><label><span style="color:633393"><b>{{total}}</b></span></label></td>
+													</tr>
+												</tfoot>
+											</table>
+											<br>                            
+										</form>
+									</fieldset>
+									<div class="nav-buttons">
+										<button id="previous">Previous Student</button>
+										<button id="go-to">Submit &amp; Go to Next Student</button>
+									</div>									
+								</div>
+							</div><br>
+						</fieldset>
+					</div>
+					<div id="comments" class="tab-pane fade in">
+						<fieldset>
+							<div class = "intro">
+								<h2>Leave a Comment</h2>
+								<br>
+								<p>Leave comments for each SLO associated with your class. Comments have a max length of 2500 characters and are completely optional.</p>								
+							</div>
+							<div class = "slo"> 
+								<div>
+									<fieldset>
+										<legend><span style="color:#633393"><b>SLO 1 - Identify and apply current technical concepts in the cor information technologies.</b></span></legend>
+										<form action="">
+											<textarea name="message" rows="10" cols="80"></textarea>
+											<br>
+										</form>
+									</fieldset>
+									<fieldset>
+										<legend><span style="color:#633393"><b>SLO 2 - Design, Implement, and administer effective IT solutions based on user requirements.</b></span></legend>
+										<form action="">
+											<textarea name="message" rows="10" cols="80"></textarea>
+											<br>
+										</form>
+									</fieldset>
+									<button>Submit Assessments</button>
+								</div>
+							</div><br>
+						</fieldset>
+					</div>
+				</div>                
+            </div>
+        </div>
+    </body>
+</html>
