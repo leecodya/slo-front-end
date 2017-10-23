@@ -58,4 +58,10 @@ export class CourseService {
             return res.json();
         });
     }
+
+    deleteCourse(course: Course) {
+        return this.http.delete(this._baseURL + `/course/${course.crn}`, this.helperService.jwt()).map((res: Response) => {
+            return res;
+        });
+    }
 }

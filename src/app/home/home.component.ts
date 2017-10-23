@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, CourseService, AlertService, SLOService } from '../_services';
+import { Router } from '@angular/router';
 import { ValidationManager } from 'ng2-validation-manager';
 import { Course, Faculty, SLO } from '../_models';
 
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private alertService: AlertService,
     private courseService: CourseService,
-    private sloService: SLOService
+    private sloService: SLOService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -90,6 +92,7 @@ export class HomeComponent implements OnInit {
     this.courseService.createCourse(myCourse).subscribe(
       data => {
         this.alertService.success("Course successfully added");
+        this.router.navigate(['/assessment'], data.crn);
       },
       error => {
         this.alertService.error(error);

@@ -14,6 +14,8 @@ import { AuthenticationService, HelperService, AlertService, CourseService, SLOS
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { AssessmentComponent } from './assessment/assessment.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { LoginComponent } from './login/login.component';
     AlertComponent,
     MenuComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    AssessmentComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
