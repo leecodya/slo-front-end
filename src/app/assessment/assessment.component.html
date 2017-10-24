@@ -1,3 +1,35 @@
+<menu-bar></menu-bar>
+
+<section class="current-class cf">
+  <div class="section-header">
+    <a class="active">Your Class</a>
+  </div>
+
+  <aside>
+    <h1>This is Your Class.</h1>
+    <p>You are working on completing assessments for this class.  Closing this page at any point will automatically save your information.</p>
+  </aside>
+
+  <div class="content cf">
+    <div class="course-card" [routerLink]="['/assessment', course.crn]">
+      <h3 class="course-title">{{ course.course_type }} {{ course.course_name }}</h3>
+      <p class="course-data"><span>{{ course.crn }} -</span> SLO #1, #2</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="current-class cf">
+  <div class="section-header">
+    <a (click)="loadSection('Add Students')" [ngClass]="{ active: currentSection == 'Add Students' }">Add Students</a>
+    <a (click)="loadSection('Assess Students')" [ngClass]="{ active: currentSection == 'Assess Students' }">Assess Students</a>
+    <a (click)="loadSection('Leave Comments')" [ngClass]="{ active: currentSection == 'Leave Comments' }">Leave Comments</a>
+  </div>
+
+  <app-add-students [course]="course" (update)="updateCourse()" *ngIf="currentSection == 'Add Students'"></app-add-students>
+  <app-assess-students *ngIf="currentSection == 'Assess Students'"></app-assess-students>
+</section>
+
 <pre>
   {{ course | json }}
 </pre>

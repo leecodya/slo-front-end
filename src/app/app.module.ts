@@ -10,12 +10,14 @@ import { AlertComponent } from './_directives/alert/alert.component';
 import { MenuComponent } from './_directives/menu/menu.component';
 
 import { AuthGuard } from './_guards/auth.guard';
-import { AuthenticationService, HelperService, AlertService, CourseService, SLOService } from './_services/';
+import { AuthenticationService, HelperService, AlertService, CourseService, SLOService, StudentService } from './_services/';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { AssessmentComponent } from './assessment/assessment.component';
 import { RegisterComponent } from './register/register.component';
+import { AssessmentComponent } from './assessment/assessment.component';
+import { AddStudentsComponent } from './assessment/add-students/add-students.component';
+import { AssessStudentsComponent } from './assessment/assess-students/assess-students.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { RegisterComponent } from './register/register.component';
     HomeComponent,
     LoginComponent,
     AssessmentComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddStudentsComponent,
+    AssessStudentsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,7 @@ import { RegisterComponent } from './register/register.component';
     AuthenticationService,
     CourseService,
     SLOService,
+    StudentService,
     HelperService
   ],
   bootstrap: [AppComponent]

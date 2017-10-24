@@ -1,0 +1,40 @@
+<aside>
+    <h1>Let's Add Your Students</h1>
+    <p>To assess your students, first add them to your class. When you have added all your students, press next below.</p>
+    <p>Pro-tip: Use the enter key to add the student and start from the beginning.</p>
+</aside>
+
+<div class="content cf">
+    <form class="new-student-form" [formGroup]="form.getForm()" (ngSubmit)="form.isValid() && submit()" novalidate>
+        <alert></alert>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="student_id">Student Number</label>
+                <input type="text" formControlName="student_id" name="student_id" placeholder="983000111" size="11">
+                <div *ngIf="form.hasError('student_id')" class="error">9 digit number</div>
+            </div>
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" formControlName="first_name" placeholder="John" size="11">
+                <div *ngIf="form.hasError('first_name')" class="error">string</div>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" formControlName="last_name" placeholder="Smith" size="11">
+                <div *ngIf="form.hasError('last_name')" class="error">string</div>
+            </div>
+                <div class="form-group">
+                <button type="submit" class="button">Submit</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="students">
+        <p class="student-heading">Your Students</p>
+        <div *ngFor="let student of course.students" (click)="removeStudent(student, course)" class="student">
+            {{ student.student_id }} - {{ student.first_name }} {{ student.last_name }}
+            <span class="remove">✖</span>
+        </div>
+    </div>
+
+</div>

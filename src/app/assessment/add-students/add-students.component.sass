@@ -1,0 +1,51 @@
+@import 'variables'
+
+.new-student-form
+    float: right
+
+    button[type=submit]
+        margin-top: 21px
+        padding: 14px 20px
+    
+.students
+    float: right
+    padding-left: 20px
+
+    .student
+        display: inline-block
+        width: 270px
+        margin-left: 20px
+        border: 1px solid $c-form-border
+        font-size: 14px
+        color: white
+        padding: 7px 10px
+        margin-bottom: 15px
+        position: relative
+
+        .remove
+            position: absolute
+            top: 0
+            bottom: 0
+            right: 0
+            width: 30px
+            text-align: center
+            background-color: $c-button
+            padding-top: 5px
+            font-size: 18px
+
+        &:hover
+            border: 1px solid $c-form-border-active
+            cursor: pointer
+
+            .remove
+                background-color: $c-button-active
+
+    .student-heading
+        padding-bottom: 10px
+        margin-bottom: 10px
+        margin-top: 20px
+        font-family: $f
+        font-size: 14px
+        font-weight: 500
+        color: rgba(255, 255, 255, .9)
+        margin-left: 20px
