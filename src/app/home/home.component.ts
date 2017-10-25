@@ -41,6 +41,8 @@ export class HomeComponent implements OnInit {
       data => {
         this.courses = data;
         this.visibleCourses = this.courses.filter(x => x.completion);
+        console.log(this.courses);
+        console.log(this.visibleCourses);
         this.faculty = this.courses[0].faculty;
         this.loading_courses = false;
       },
@@ -92,7 +94,7 @@ export class HomeComponent implements OnInit {
     this.courseService.createCourse(myCourse).subscribe(
       data => {
         this.alertService.success("Course successfully added");
-        this.router.navigate(['/assessment'], data.crn);
+        this.router.navigate(['/assessment', data.crn]);
       },
       error => {
         this.alertService.error(error);

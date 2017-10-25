@@ -1,3 +1,56 @@
-<p>
-  register works!
-</p>
+<div class="register-container">
+  <div class="v-center-container">
+    <div class="header">
+      <img class="logo" src="assets/MGSULogo.png" alt="Middle Georgia State University Logo">
+      <h1>Assessments Matrix</h1>
+      <p>Please create a new account.</p>
+    </div>
+
+    <form [formGroup]="form.getForm()" (ngSubmit)="form.isValid() && submit()" novalidate>
+      <alert></alert>
+      <div class="form-row">
+        <div class="form-group">
+            <label for="email">MGA Email</label>
+            <input type="email" formControlName="email" name="email" placeholder="deep.patel@mga.edu" size="10">
+            <div *ngIf="form.hasError('email')" class="error">Valid MGA email</div>
+        </div>
+        <div class="form-group">
+            <label for="faculty_id">Faculty ID</label>
+            <input type="text" formControlName="faculty_id" name="faculty_id" placeholder="983111222" size="10">
+            <div *ngIf="form.hasError('email')" class="error">9 digit number</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" formControlName="first_name" name="first_name" placeholder="Deep" size="10">
+            <div *ngIf="form.hasError('first_name')" class="error">Required</div>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" formControlName="last_name" name="last_name" placeholder="Deep" size="10">
+            <div *ngIf="form.hasError('last_name')" class="error">Required</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" name="password" size="10">
+            <div *ngIf="form.hasError('password')" class="error">Required</div>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" formControlName="confirm_password" name="confirm_password" size="10">
+            <div *ngIf="form.hasError('confirm_password')" class="error">Must Match</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">Login</button>
+      </div>
+      <a [routerLink]="['/login']" class="register-link">Already have an account? Click here to login.</a>
+    </form>
+  </div>
+</div>
