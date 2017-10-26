@@ -19,7 +19,7 @@ export class Assessment {
     total_score: Number;
     student: Student;
     course: Course;
-    slo: SLO;
+    assigned_slos: SLO;
     scores: Score[];
 
     constructor(init?: Partial<Assessment>) {

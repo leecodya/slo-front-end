@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService, CourseService, AlertService, SLOService } from '../_services';
+import { AuthenticationService, CourseService, AlertService, SLOService, FacultyService } from '../_services';
 import { Router } from '@angular/router';
 import { ValidationManager } from 'ng2-validation-manager';
 import { Course, Faculty, SLO } from '../_models';
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   loading_courses: Boolean = true; //loading indicator for courses section
   loading_slos: Boolean = true; //loading indicator for slos
   faculty: Faculty = new Faculty(); //the current faculty member that's logged in.
-  currentSection: String = "complete"; //section selection variable for courses section
+  currentSection: String = "incomplete"; //section selection variable for courses section
   slos = []; // each object will be { 'slo_id': value, 'slo_description': value, and 'checked': true/false }
   form; //start new assessment form
 
@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
     private alertService: AlertService,
     private courseService: CourseService,
     private sloService: SLOService,
+    private facultyService: FacultyService,
     private router: Router
   ) { }
 
@@ -37,13 +38,25 @@ export class HomeComponent implements OnInit {
     });
 
     this.loading_courses = true;
+    this.facultyService.getUserInfo().subscribe(
+      data => { this.faculty = data },
+      error => { console.log(error) }
+    );
+
     this.courseService.getCourses().subscribe(
       data => {
         this.courses = data;
-        this.visibleCourses = this.courses.filter(x => x.completion);
-        console.log(this.courses);
-        console.log(this.visibleCourses);
-        this.faculty = this.courses[0].faculty;
+        let incompleteCourses = this.courses.filter(x => !x.completion);
+        let completeCourses = this.courses.filter(x => x.completion);
+
+        if (incompleteCourses.length == 0) {
+          this.visibleCourses = completeCourses;
+          this.currentSection = 'complete';
+        } else {
+          this.visibleCourses = incompleteCourses;
+          this.currentSection = 'incomplete';
+        }
+        
         this.loading_courses = false;
       },
       error => {
@@ -97,8 +110,8 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/assessment', data.crn]);
       },
       error => {
-        this.alertService.error(error);
-        console.log(error);
+        this.alertService.error(error.json().message);
+        console.log(error.json());
       }
     );
   }

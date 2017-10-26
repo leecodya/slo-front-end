@@ -10,7 +10,7 @@ import { AlertComponent } from './_directives/alert/alert.component';
 import { MenuComponent } from './_directives/menu/menu.component';
 
 import { AuthGuard } from './_guards/auth.guard';
-import { AuthenticationService, HelperService, AlertService, CourseService, SLOService, StudentService, FacultyService } from './_services/';
+import { AuthenticationService, HelperService, FacultyService, AlertService, CourseService, SLOService, StudentService } from './_services/';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -42,12 +42,12 @@ import { AssessStudentsComponent } from './assessment/assess-students/assess-stu
   providers: [
     AuthGuard,
     AlertService,
+    FacultyService,
     AuthenticationService,
     CourseService,
     SLOService,
     StudentService,
     HelperService,
-    FacultyService
   ],
   bootstrap: [AppComponent]
 })

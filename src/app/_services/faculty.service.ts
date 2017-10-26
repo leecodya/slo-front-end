@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { HelperService } from './helper.service';
 import 'rxjs/add/operator/map'
 
 import { Faculty } from '../_models';
@@ -9,8 +10,14 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class FacultyService {
     _baseURL: string = environment.api;
-    constructor(private http: Http) { }
+    constructor(private http: Http, private helperService: HelperService) { }
 
+    getUserInfo() {
+        return this.http.get(this._baseURL + '/users', this.helperService.jwt()).map((res: Response) => {
+            return new Faculty(res.json());
+        });
+    }
+    
     register(faculty: Faculty, password: String) {
         let facultyData = {
             email: faculty.email,

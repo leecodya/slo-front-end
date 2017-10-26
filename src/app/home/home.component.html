@@ -2,17 +2,18 @@
 
 <section class="courses cf">
   <div class="section-header">
-    <a (click)="loadSection('complete')" [ngClass]="{ active: currentSection == 'complete' }">Complete</a>
     <a (click)="loadSection('incomplete')" [ngClass]="{ active: currentSection == 'incomplete' }">Incomplete</a>
+    <a (click)="loadSection('complete')" [ngClass]="{ active: currentSection == 'complete' }">Complete</a>
   </div>
   <aside>
     <h1>Hi {{ faculty.first_name }} {{ faculty.last_name }}.</h1>
-    <p>These are your completed assessments. You don’t need to do anything else for these classes.</p>
+    <p *ngIf="currentSection == 'complete'">These are your completed assessments. You don’t need to do anything else for these classes.</p>
+    <p *ngIf="currentSection == 'incomplete'">These are your incomplete assessments. Click on them to continue editing.</p>
   </aside>
   <div class="content cf">
     <div *ngFor="let course of visibleCourses" class="course-card" [routerLink]="['/assessment', course.crn]">
       <h3 class="course-title">{{ course.course_type }} {{ course.course_name }}</h3>
-      <p class="course-data"><span>{{ course.crn }} -</span> SLO #1, #2</p>
+      <p class="course-data"><span class="crn">{{ course.crn }} -</span> SLO <span *ngFor="let slo of course.assigned_slos; let isLast=last">#{{ slo.slo_id }}{{isLast ? '' : ', '}}</span></p>
     </div>
   </div>
   <div *ngIf="loading_courses" class="loader">
