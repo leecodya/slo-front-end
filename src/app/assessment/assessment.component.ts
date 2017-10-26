@@ -12,6 +12,7 @@ import { AddStudentsComponent } from './add-students/add-students.component';
 export class AssessmentComponent implements OnInit {
   course: Course = new Course();
   currentSection = 'Add Students';
+  deleteCourseConfirm: Boolean = false;
 
   constructor(
     private router: Router,
@@ -36,6 +37,11 @@ export class AssessmentComponent implements OnInit {
   }
 
   deleteCourse() {
+    if (!this.deleteCourseConfirm) {
+      this.deleteCourseConfirm = true;
+      return;
+    }
+    
     this.courseService.deleteCourse(this.course).subscribe(
       data => {
         this.router.navigate(['/home']);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FacultyService } from '../_services';
+import { FacultyService, AlertService } from '../_services';
 import { Router } from '@angular/router';
 import { ValidationManager } from 'ng2-validation-manager';
 import { Faculty } from '../_models';
@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private facultyService: FacultyService,
+    private alertService: AlertService,
     private router: Router
   ) { }
 
@@ -39,11 +40,11 @@ export class RegisterComponent implements OnInit {
     
     this.facultyService.register(faculty, this.form.getData().password).subscribe(
       data => {
-        console.log("SUCCESSFULLY REGISTERED");
-        console.log(data);
+        this.alertService.success("Successfully registered! You may now login.", true);
+        this.router.navigate(['/login'], { queryParams: { email: data.email } });
       },
       error => {
-        console.log("WHOOPS");
+        this.alertService.error(error.json().message);
         console.log(error);
       }
     )

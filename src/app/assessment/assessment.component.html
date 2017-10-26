@@ -8,6 +8,7 @@
   <aside>
     <h1>This is Your Class.</h1>
     <p>You are working on completing assessments for this class.  Closing this page at any point will automatically save your information.</p>
+    <button class="delete-course" (click)="deleteCourse()"><span *ngIf="!deleteCourseConfirm">Delete this course?</span><span *ngIf="deleteCourseConfirm">This cannot be reversed. Click again to confirm.</span></button>
   </aside>
 
   <div class="content cf">
@@ -15,7 +16,9 @@
       <h3 class="course-title">{{ course.course_type }} {{ course.course_name }}</h3>
       <p class="course-data"><span class="crn">{{ course.crn }} -</span> SLO <span *ngFor="let slo of course.assigned_slos; let isLast=last">#{{ slo.slo_id }}{{isLast ? '' : ', '}}</span></p>
     </div>
+
   </div>
+  
 </section>
 
 
@@ -29,10 +32,3 @@
   <app-add-students [course]="course" (update)="updateCourse()" *ngIf="currentSection == 'Add Students'"></app-add-students>
   <app-assess-students *ngIf="currentSection == 'Assess Students'"></app-assess-students>
 </section>
-
-<pre>
-  {{ course | json }}
-</pre>
-
-
-<button (click)="deleteCourse()">Delete This Course?</button>
