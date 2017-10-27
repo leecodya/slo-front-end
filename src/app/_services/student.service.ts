@@ -18,4 +18,16 @@ export class StudentService {
         return this.http.delete(this._baseURL + `/student/${student.student_id}?crn=${course.crn}`, this.helperService.jwt())
             .map((res: Response) => { return res });
     }
+
+    addStudent(student: Student, course: Course) {
+        let studentData = {
+            first_name: student.first_name,
+            last_name: student.last_name,
+            crn: course.crn
+        };
+
+        return this.http.post(this._baseURL + `/student/${student.student_id}`, studentData, this.helperService.jwt()).map((res: Response) => {
+            return new Student(res.json());
+        });
+    }
 }

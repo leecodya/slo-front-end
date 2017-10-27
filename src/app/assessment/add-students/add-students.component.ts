@@ -12,6 +12,7 @@ import { StudentService } from '../../_services/';
 
 export class AddStudentsComponent implements OnInit {
     form;
+    formLoading: Boolean = false;
 
     @Input()
     course: Course;
@@ -38,11 +39,14 @@ export class AddStudentsComponent implements OnInit {
     }
 
     removeStudent(student: Student, course: Course) {
+        // Remove the student element from the page first, before sending the request out (Seems "quicker" to the user)
+        let studentElement = document.getElementById(student.student_id.toString());
+        document.getElementById("students-container").removeChild(studentElement);
+
         this.studentService.removeStudent(student, course).subscribe(
             data => {
-                console.log(data);
-                console.log("SUCCESS");
                 this.change.emit(true);
+                console.log("Removed Student");
             },
             error => {
                 console.log(error);
@@ -52,6 +56,20 @@ export class AddStudentsComponent implements OnInit {
 
 
     submit() {
-        console.log(this.course);
+        this.formLoading = true;
+        let student = new Student(this.form.getData());
+        this.form.reset();
+        document.getElementById("student_id_input").focus();
+        
+        this.studentService.addStudent(student, this.course).subscribe(
+            data => { 
+                this.change.emit(true);
+                
+                setTimeout(() => {
+                    this.formLoading = false;
+                }, 300);
+            },
+            error => { console.log(error) }
+        );
     }
 }
