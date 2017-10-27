@@ -29,6 +29,6 @@
     <a (click)="loadSection('Leave Comments')" [ngClass]="{ active: currentSection == 'Leave Comments' }">Leave Comments</a>
   </div>
 
-  <app-add-students [course]="course" (update)="updateCourse()" *ngIf="currentSection == 'Add Students'"></app-add-students>
+  <app-add-students [course]="course" (update)="updateCourse()" (advance)="nextSection()" *ngIf="currentSection == 'Add Students'"></app-add-students>
   <app-assess-students *ngIf="currentSection == 'Assess Students'"></app-assess-students>
 </section>

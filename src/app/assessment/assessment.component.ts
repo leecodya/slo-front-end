@@ -41,7 +41,7 @@ export class AssessmentComponent implements OnInit {
       this.deleteCourseConfirm = true;
       return;
     }
-    
+
     this.courseService.deleteCourse(this.course).subscribe(
       data => {
         this.router.navigate(['/home']);
@@ -61,6 +61,15 @@ export class AssessmentComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  nextSection() {
+    if (this.currentSection == 'Add Students') {
+      this.currentSection = 'Assess Students';
+    } 
+    else if (this.currentSection == 'Assess Students') {
+      this.currentSection = 'Leave Comments';
+    }
   }
 
 }

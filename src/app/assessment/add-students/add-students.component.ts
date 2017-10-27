@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
 import { ValidationManager } from 'ng2-validation-manager';
 import { Course, Student } from '../../_models/';
-import { StudentService } from '../../_services/';
+import { StudentService, AlertService } from '../../_services/';
 
 
 @Component({
@@ -20,8 +20,12 @@ export class AddStudentsComponent implements OnInit {
     @Output('update')
     change: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    @Output('advance')
+    advanceSection: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     constructor(
-        private studentService: StudentService
+        private studentService: StudentService,
+        private alertService: AlertService
     ) { }
 
     ngOnInit() {
@@ -71,5 +75,14 @@ export class AddStudentsComponent implements OnInit {
             },
             error => { console.log(error) }
         );
+    }
+
+
+    nextSection() {
+        if (this.course.students.length == 0) {
+            this.alertService.error("Please add your students first.");
+        } else {
+            this.advanceSection.emit(true);
+        }
     }
 }
