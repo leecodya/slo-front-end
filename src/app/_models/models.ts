@@ -6,7 +6,7 @@ export class Course {
     course_year: Date;
     faculty: Faculty;
     completion: Boolean;
-    slos: SLO[];
+    assigned_slos: SLO[];
     students: Student[];
 
     constructor(init?: Partial<Course>) {
@@ -53,6 +53,7 @@ export  class SLO {
     slo_id: String;
     slo_description: String;
     comments: String;
+    performance_indicators: PerformanceIndicator[];
 
     constructor(init?: Partial<SLO>) {
         Object.assign(this, init);
@@ -61,7 +62,6 @@ export  class SLO {
 
 export class Score {
     performance_indicator_id: String;
-    assessment_id: Number;
     score: Number;
 
     constructor(init?: Partial<Score>) {

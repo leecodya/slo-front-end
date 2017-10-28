@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
     let courseEntryDate = new Date();
     courseEntryDate.setFullYear(this.form.getData().course_year);
 
-    myCourse.slos = selectedSLOS.map(x => new SLO(x));
+    myCourse.assigned_slos = selectedSLOS.map(x => new SLO(x));
     myCourse.faculty = this.faculty;
     myCourse.course_year = courseEntryDate;
 

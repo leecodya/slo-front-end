@@ -26,4 +26,10 @@ export class SLOService {
             return slos;
         });
     }
+
+    getSLO(slo: SLO) {
+        return this.http.get(this._baseURL + `/slo/${slo.slo_id}`, this.helperService.jwt()).map((res: Response) => {
+            return new SLO(res.json());
+        });
+    }
 }

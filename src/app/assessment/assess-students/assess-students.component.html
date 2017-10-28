@@ -1,10 +1,38 @@
 <aside>
-        <h1>Let's Assess Your Students</h1>
-        <p>Finally, let’s assess your students for this class. You’ve selected 2 SLOs and you have 2 students, so you’ll need to complete 4 Assessments.</p>
-        <button class="button" (click)="nextSection()">Next - Leave Comments</button>
-    </aside>
+    <h1>Let's Assess Your Students</h1>
+    <p>Finally, let’s assess your students for this class. You’ve selected 2 SLOs and you have 2 students, so you’ll need to complete 4 Assessments.</p>
+    <button class="button" (click)="nextSection()">Next - Leave Comments</button>
+</aside>
     
-    <div class="content cf">
-        <p>Not implemented yet. I'm working on it.</p>
-    
+<div class="content cf">
+        <form class="assess-student-form" (ngSubmit)="submit()" novalidate>
+            <div class="current-student">
+                <label for="active-student">Currently Assessing</label>
+                <select name="active-student" [(ngModel)]="selectedStudentId">
+                    <option *ngFor="let student of course.students" [value]="student.student_id">{{ student.student_id }} - {{ student.first_name }} {{ student.last_name }}</option>
+                </select>
+            </div>
+            <alert></alert>
+            <div *ngFor="let slo of form" class="form-row">
+                <div class="section-header">{{ slo.slo_id }} - {{ slo.slo_description }}</div>
+
+                <div *ngFor="let pi of slo.performance_indicators" class="form-group cf">
+                    <label [for]="pi.performance_indicator_id" class="perf_indicator">{{ pi.performance_indicator_description }}</label><!--
+                    --><div class="input-wrapper"><input [name]="pi.performance_indicator_id" [(ngModel)]="pi.score" type="text"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <button type="submit" class="button" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Submit</span></button>
+                </div>
+            </div>
+        </form>
+</div>
+
+<div *ngIf="loadingAssessments || loadingSlos" class="loader">
+    <p class="loading-text">Loading assessment data...</p>
+    <div id="progress-bar">
+        <div id="loadingProgressG_1" class="progress-bar"></div>
     </div>
+</div>

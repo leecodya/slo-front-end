@@ -35,7 +35,7 @@ export class CourseService {
 
     createCourse(course: Course) {
         let assigned_slos = [];
-        course.slos.forEach(sloObject => {
+        course.assigned_slos.forEach(sloObject => {
             assigned_slos.push({
                 slo_id: sloObject.slo_id,
                 comments: null

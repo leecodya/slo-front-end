@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
+import { ValidationManager } from 'ng2-validation-manager';
+import { Course, SLO, Assessment, Student } from '../../_models/';
+import { SLOService, AlertService, AssessmentService } from '../../_services/';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
 
 
 @Component({
@@ -8,7 +13,109 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AssessStudentsComponent implements OnInit {
-    ngOnInit() {
+    @Input()
+    course: Course;
+    slos: any; // will be list of SLO[] objects. ForkJoin issues required type: any
+    assessments: Assessment[];
+    selectedStudentId: String;
 
+    form = [];
+    formLoading = false;
+
+    loadingSlos: Boolean = true;
+    loadingAssessments: Boolean = true;
+    
+
+    @Output('advance')
+    advanceSection: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    constructor(
+      private alertService: AlertService,
+      private sloService: SLOService,
+      private assessmentService: AssessmentService
+    ) { }
+
+    ngOnInit() {
+      let sloRequests = [];
+      this.course.assigned_slos.forEach(slo => {
+        sloRequests.push(this.sloService.getSLO(slo));
+      });
+
+      Observable.forkJoin(sloRequests).subscribe(
+        slos => {
+          this.slos = slos;
+          this.loadingSlos = false;
+          this.generateFormObject();
+
+          this.assessmentService.getAssessments(this.course).subscribe(
+            data => { 
+              this.assessments = data;
+              this.loadingAssessments = false;
+              this.course.students.length > 0 ? this.loadStudent(this.course.students[0]) : null;
+            },
+            error => {
+              this.loadingAssessments = false;
+              console.log(error);
+            }
+          );
+        },
+        error => {
+          this.loadingSlos = false;
+          console.log(error);
+        }
+      );
+    }
+
+    ngOnChanges(changes: SimpleChange) {
+      if (changes['course'] && ! changes['course'].isFirstChange()) {
+          this.course = changes['course'].currentValue;
+      }
+   }
+
+    nextSection() {
+
+    }
+
+    submit() {
+      console.log(this.form);
+      console.log(this.selectedStudentId);
+    }
+
+    loadStudent(student: Student) {
+      console.log(student);
+
+      let matchingStudentAssessments = this.assessments.filter(x => { 
+        return x.student.student_id === student.student_id 
+      });
+
+      console.log(matchingStudentAssessments);
+      // to-do: For each matching assessment, populate assessment data into the form. Oh, also add change event handler to select that will call this function
+      this.selectedStudentId = student.student_id;
+    }
+
+    generateFormObject() {
+      let that = this;
+
+      this.slos.forEach(x => {
+        let y: SLO = new SLO(x);
+
+        let perfs = [];
+        y.performance_indicators.forEach(perfIndicator => {
+          perfs.push({
+            performance_indicator_id: perfIndicator.performance_indicator_id,
+            performance_indicator_description: perfIndicator.performance_indicator_description,
+            score: 0
+          });
+        });
+        
+        that.form.push({
+          slo_id: y.slo_id,
+          slo_description: y.slo_description,
+          assessment_id: null,
+          performance_indicators: perfs
+        })
+
+        console.log(that.form);
+      });
     }
 }
