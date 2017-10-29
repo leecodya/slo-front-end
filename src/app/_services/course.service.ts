@@ -49,7 +49,7 @@ export class CourseService {
             course_type: course.course_type,
             semester: course.semester,
             course_year: Math.floor(course.course_year.valueOf() / 1000),
-            slos: assigned_slos
+            assigned_slos: assigned_slos
         }
 
         console.log(courseData);

@@ -26,4 +26,30 @@ export class AssessmentService {
             return assessments;
         });
     }
+
+    createAssessment(assessment: Assessment) {
+        let assessmentData = {
+            student_id: assessment.student.student_id,
+            slo_id: assessment.slo.slo_id,
+            scores: assessment.scores
+        }
+
+        console.log(assessmentData);
+
+        return this.http.post(this._baseURL + `/assessments/${assessment.course.crn}`, assessmentData, this.helperService.jwt())
+            .map((res: Response) => {
+                return new Assessment(res.json());
+            });
+    }
+
+    updateAssessment(assessment: Assessment) {
+        let assessmentData = {
+            scores: assessment.scores
+        }
+
+        return this.http.put(this._baseURL + `/assessment/${assessment.assessment_id}`, assessmentData, this.helperService.jwt())
+            .map((res: Response) => {
+                return new Assessment(res.json());
+            });
+    }
 }

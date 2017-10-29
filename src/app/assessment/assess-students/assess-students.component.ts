@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
 import { ValidationManager } from 'ng2-validation-manager';
-import { Course, SLO, Assessment, Student } from '../../_models/';
+import { Course, SLO, Assessment, Student, Score } from '../../_models/';
 import { SLOService, AlertService, AssessmentService } from '../../_services/';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
@@ -76,21 +76,96 @@ export class AssessStudentsComponent implements OnInit {
 
     }
 
-    submit() {
-      console.log(this.form);
-      console.log(this.selectedStudentId);
+    save(goToNextStudent?: Boolean) {
+      this.formLoading = true;
+      let assessmentBatch = [];
+      this.form.forEach(individualAssessment => {
+        console.log(this.selectedStudentId);
+        let assessment = new Assessment({
+          assessment_id: individualAssessment.assessment_id,
+          slo: new SLO({ slo_id: individualAssessment.slo_id }),
+          student: new Student({ student_id: this.selectedStudentId }),
+          course: new Course({ crn: this.course.crn }),
+          scores: individualAssessment.performance_indicators.map(x => new Score({ performance_indicator_id: x.performance_indicator_id, score: +x.score }))
+        });
+
+        if (assessment.assessment_id) {
+          assessmentBatch.push(this.assessmentService.updateAssessment(assessment));
+        } else {
+          assessmentBatch.push(this.assessmentService.createAssessment(assessment));
+        }
+      });
+
+      Observable.forkJoin(assessmentBatch).subscribe(
+        newlyCreatedAssessments => {
+          this.assessmentService.getAssessments(this.course).subscribe(
+            data => {
+              console.log(data);
+              console.log(this.assessments);
+              this.assessments = data;
+              this.formLoading = false;
+              goToNextStudent ? this.nextStudent() : null;
+            },
+            error => {
+              this.alertService.error(error);
+              console.log(error);
+            }
+          );
+        },
+        error => {
+          this.formLoading = false;
+          this.alertService.error(error);
+          console.log(error);
+        }
+      );
+    }
+
+    loadSelectedStudent(event: Event) {
+      let studentId = (<HTMLInputElement>event.target).value;
+      this.loadStudent(new Student({ student_id: studentId }));
     }
 
     loadStudent(student: Student) {
-      console.log(student);
-
       let matchingStudentAssessments = this.assessments.filter(x => { 
         return x.student.student_id === student.student_id 
       });
 
-      console.log(matchingStudentAssessments);
-      // to-do: For each matching assessment, populate assessment data into the form. Oh, also add change event handler to select that will call this function
+      matchingStudentAssessments.forEach(x => {
+        let matchingFormObj = this.form.find(y => y.slo_id === x.slo.slo_id);
+        matchingFormObj.assessment_id = x.assessment_id;
+        
+        x.scores.forEach(score => {
+          let matchingPerfIndicator = matchingFormObj.performance_indicators.find(perf => perf.performance_indicator_id === score.performance_indicator_id);
+          matchingPerfIndicator.score = score.score;
+        });
+      });
+      
       this.selectedStudentId = student.student_id;
+      if (matchingStudentAssessments.length == 0) {
+        this.form.forEach(slo => {
+          slo.assessment_id = null;
+          slo.performance_indicators.forEach(perf => {
+            perf.score = 1;
+          });
+        });
+      }
+    }
+
+
+    nextStudent() {
+      let currentStudentIndex = this.course.students.findIndex(x => x.student_id == this.selectedStudentId);
+
+      if (currentStudentIndex != (this.course.students.length - 1)) {
+        this.loadStudent(this.course.students[currentStudentIndex + 1]);
+      }
+    }
+
+    previousStudent() {
+      let currentStudentIndex = this.course.students.findIndex(x => x.student_id == this.selectedStudentId);
+
+      if (currentStudentIndex !== 0) {
+        this.loadStudent(this.course.students[currentStudentIndex - 1]);
+      }
     }
 
     generateFormObject() {
@@ -104,7 +179,7 @@ export class AssessStudentsComponent implements OnInit {
           perfs.push({
             performance_indicator_id: perfIndicator.performance_indicator_id,
             performance_indicator_description: perfIndicator.performance_indicator_description,
-            score: 0
+            score: 1
           });
         });
         
@@ -114,8 +189,24 @@ export class AssessStudentsComponent implements OnInit {
           assessment_id: null,
           performance_indicators: perfs
         })
-
-        console.log(that.form);
       });
+    }
+
+    validateInput(event) {
+      let num = parseInt(event.target.value);
+      
+      if (!num) {
+        event.target.value = "1";
+        event.target.select();
+      }
+      else if (num < 1) {
+        event.target.value = "1";
+        event.target.select();
+      }
+      else if (num > 4) {
+        event.target.value = "4";
+        event.target.select();
+      }
+
     }
 }

@@ -5,10 +5,10 @@
 </aside>
     
 <div class="content cf">
-        <form class="assess-student-form" (ngSubmit)="submit()" novalidate>
+        <form class="assess-student-form" (ngSubmit)="save(true)" novalidate>
             <div class="current-student">
                 <label for="active-student">Currently Assessing</label>
-                <select name="active-student" [(ngModel)]="selectedStudentId">
+                <select name="active-student" [disabled]="formLoading" [(ngModel)]="selectedStudentId" (change)="loadSelectedStudent($event)">
                     <option *ngFor="let student of course.students" [value]="student.student_id">{{ student.student_id }} - {{ student.first_name }} {{ student.last_name }}</option>
                 </select>
             </div>
@@ -18,13 +18,14 @@
 
                 <div *ngFor="let pi of slo.performance_indicators" class="form-group cf">
                     <label [for]="pi.performance_indicator_id" class="perf_indicator">{{ pi.performance_indicator_description }}</label><!--
-                    --><div class="input-wrapper"><input [name]="pi.performance_indicator_id" [(ngModel)]="pi.score" type="text"></div>
+                    --><div class="input-wrapper"><input [id]="pi.performance_indicator_id" [name]="pi.performance_indicator_id" [(ngModel)]="pi.score" autocomplete="off" (keyup)="validateInput($event)" type="text"></div>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <button type="submit" class="button" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Submit</span></button>
+                    <button type="submit" class="button" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Save Changes & Go to Next Student</span></button>
+                    <button class="button" [disabled]="formLoading"><span *ngIf="!formLoading">Previous Student</span></button>
                 </div>
             </div>
         </form>
