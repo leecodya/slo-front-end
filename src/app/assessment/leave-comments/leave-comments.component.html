@@ -1,0 +1,15 @@
+<aside>
+    <h1>Final Comments</h1>
+    <p>You may leave comments for each SLO that was assigned to this course. This is completely optional. Hit Submit Data to finalize your assessments.</p>
+    <button class="button" (click)="submit()" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Submit Data</span></button>
+</aside>
+        
+<div class="content cf">
+    <form class="leave-comments-form" (ngSubmit)="submit()" novalidate>
+        <alert></alert>
+        <div *ngFor="let slo of course.assigned_slos" class="form-row">
+            <div class="section-header">{{ slo.slo_id }} - {{ slo.slo_description }}</div>
+            <textarea [name]="slo.slo_id" [(ngModel)]="slo.comments" placeholder="Optional Comments Concerning SLO {{slo.slo_id}} Here" autocomplete="off" type="text"></textarea>
+        </div>
+    </form>
+</div>

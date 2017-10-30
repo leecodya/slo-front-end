@@ -16,7 +16,7 @@ export class AssessStudentsComponent implements OnInit {
     @Input()
     course: Course;
     slos: any; // will be list of SLO[] objects. ForkJoin issues required type: any
-    assessments: Assessment[];
+    assessments: Assessment[] = [];
     selectedStudentId: String;
 
     form = [];
@@ -73,7 +73,7 @@ export class AssessStudentsComponent implements OnInit {
    }
 
     nextSection() {
-
+      this.advanceSection.emit(true);
     }
 
     save(goToNextStudent?: Boolean) {
@@ -157,6 +157,9 @@ export class AssessStudentsComponent implements OnInit {
 
       if (currentStudentIndex != (this.course.students.length - 1)) {
         this.loadStudent(this.course.students[currentStudentIndex + 1]);
+      }
+      else if (currentStudentIndex == (this.course.students.length - 1)) {
+        this.nextSection();
       }
     }
 

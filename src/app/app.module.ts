@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { AddStudentsComponent } from './assessment/add-students/add-students.component';
 import { AssessStudentsComponent } from './assessment/assess-students/assess-students.component';
+import { LeaveCommentsComponent } from './assessment/leave-comments/leave-comments.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AssessStudentsComponent } from './assessment/assess-students/assess-stu
     AssessmentComponent,
     RegisterComponent,
     AddStudentsComponent,
-    AssessStudentsComponent
+    AssessStudentsComponent,
+    LeaveCommentsComponent
   ],
   imports: [
     BrowserModule,

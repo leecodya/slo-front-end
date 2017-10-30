@@ -1,8 +1,33 @@
 @import 'variables'
 
+aside
+    h3
+        font-family: $f
+        color: rgba(255, 255, 255, .85)
+        font-size: 18px
+        margin-top: 20px
+    
+    button
+        margin-top: 30px
+        color: white
+
 .assess-student-form
     width: 600px
     float: right
+
+    button
+        margin-right: 10px
+        color: rgba(255, 255, 255, .6)
+        vertical-align: top
+
+        &.loading
+            padding: 11px 33px
+
+        img
+            width: 20px
+
+        &:hover, &:focus
+            color: rgba(255, 255, 255, .9)
 
     .current-student
 
@@ -46,7 +71,8 @@
 
         .rubric
             position: absolute
-            top: 0
+            top: 50%
+            transform: translateY(-50%)
             left: 596px
             border: 1px solid $c-button
             font-family: $f

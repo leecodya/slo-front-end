@@ -1,6 +1,7 @@
 <aside>
     <h1>Let's Assess Your Students</h1>
-    <p>Finally, let’s assess your students for this class. You’ve selected 2 SLOs and you have 2 students, so you’ll need to complete 4 Assessments.</p>
+    <p>Finally, let’s assess your students for this class. You’ve selected {{ this.course.assigned_slos.length }} SLOs and you have {{ this.course.students.length }} students, so you’ll need to complete {{ this.course.assigned_slos.length * this.course.students.length }} Assessments.</p>
+    <h3>{{ this.assessments.length | number:'2.0-0' }}/{{ this.course.students.length | number:'2.0-0' }} Students Assessed</h3>
     <button class="button" (click)="nextSection()">Next - Leave Comments</button>
 </aside>
     
@@ -47,7 +48,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <button type="submit" class="button" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Save Changes & Go to Next Student</span></button>
-                    <button type="button" class="button" (click)="previousStudent()" [disabled]="formLoading"><span *ngIf="!formLoading">Previous Student</span></button>
+                    <button type="button" class="button" (click)="previousStudent()" [disabled]="formLoading">Previous Student</button>
                 </div>
             </div>
         </form>
