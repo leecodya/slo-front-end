@@ -1,19 +1,44 @@
 <menu-bar></menu-bar>
 
 <section class="generate-report cf">
-    <div class="section-header">
-      <a class="active">Generate Report</a>
+  <div class="section-header">
+    <a class="active">Generate Report</a>
+  </div>
+
+  <aside>
+    <h1>Export Data to Excel.</h1>
+    <p>This button will generate and give you the option to download an excel document with all the raw and summary data.</p>
+  </aside>
+
+  <div class="content cf">
+      <alert></alert>
+      <button (click)="generateReport()" class="button export" [disabled]="reportLoading" [ngClass]="{ 'loading': reportLoading }"><img *ngIf="reportLoading" src="assets/Rolling.gif" /><span *ngIf="!reportLoading">Export to Excel</span></button>
+      <a class="file-url" *ngIf="file_url" [href]="file_url">Click here to download your generated report</a>
+  </div>
+</section>
+
+
+<section class="faculty-progress cf">
+  <div class="section-header">
+    <a class="active">Faculty Progress</a>
+  </div>
+
+  <aside>
+    <h1>View Faculty Progress</h1>
+    <p>These are the current classes in progress by the various faculty members. Red is incomplete, blue is complete.</p>
+  </aside>
+
+  <div class="content cf">
+    <div *ngFor="let faculty of uniqueFaculty" class="faculty-group">
+      <h3 class="course-title">{{ faculty.first_name }} {{ faculty.last_name }}</h3>
+      <p class="courses"><span *ngFor="let course of getFacultyCourses(faculty)" [ngClass]="{ 'complete' : course.completion }">{{ course.crn }}</span></p>
     </div>
-  
-    <aside>
-      <h1>Export Data to Excel.</h1>
-      <p>This button will generate and give you the option to download an excel document with all the raw and summary data.</p>
-    </aside>
-  
-    <div class="content cf">
-        <alert></alert>
-        <button (click)="generateReport()" class="button export" [disabled]="reportLoading" [ngClass]="{ 'loading': reportLoading }"><img *ngIf="reportLoading" src="assets/Rolling.gif" /><span *ngIf="!reportLoading">Export to Excel</span></button>
-        <a class="file-url" *ngIf="file_url" [href]="file_url">Click here to download your generated report</a>
-    </div>
-    
-  </section>
+  </div>
+
+  <div *ngIf="loadingProgress" class="loader">
+      <p class="loading-text">Loading faculty progress data...</p>
+      <div id="progress-bar">
+          <div id="loadingProgressG_1" class="progress-bar"></div>
+      </div>
+  </div>
+</section>

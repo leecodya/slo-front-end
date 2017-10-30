@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SLOService, AlertService } from './../_services/';
+import { Course, Faculty } from './../_models/';
+import { SLOService, AlertService, FacultyService } from './../_services/';
 
 @Component({
   selector: 'app-admin',
@@ -8,14 +9,41 @@ import { SLOService, AlertService } from './../_services/';
 })
 export class AdminComponent implements OnInit {
   reportLoading: Boolean = false;
+  loadingProgress: Boolean = false;
   file_url: String = "";
+  courses: Course[];
+  uniqueFaculty: Faculty[] = [];
 
   constructor(
     private sloService: SLOService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private facultyService: FacultyService
   ) { }
 
   ngOnInit() {
+    this.loadingProgress = true;
+    this.facultyService.getProgress().subscribe(
+      data => {
+        this.courses = data;
+
+        // basically populate uniqueFaculty with a list of faculty members WITHOUT duplicates
+        for (let course of this.courses) {
+          if (this.uniqueFaculty.map(e => e.faculty_id).indexOf(course.faculty.faculty_id) == -1) {
+            this.uniqueFaculty.push(course.faculty);
+          }
+        }
+
+        this.loadingProgress = false;
+      },
+      error => {
+        this.alertService.error(error);
+        this.loadingProgress = false;
+      }
+    )
+  }
+
+  getFacultyCourses(faculty) {
+    return this.courses.filter(x => x.faculty.faculty_id == faculty.faculty_id);
   }
 
   generateReport() {
@@ -23,11 +51,9 @@ export class AdminComponent implements OnInit {
     this.sloService.getReport().subscribe(
       data => {
         this.file_url = data.file_url;
-        console.log(this.file_url);
         this.reportLoading = false;
       },
       error => {
-        console.log(error);
         this.reportLoading = false;
       }
     );

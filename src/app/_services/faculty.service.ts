@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { HelperService } from './helper.service';
 import 'rxjs/add/operator/map'
 
-import { Faculty } from '../_models';
+import { Faculty, Course } from '../_models';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -30,5 +30,18 @@ export class FacultyService {
         return this.http.post(this._baseURL + '/register', facultyData).map((res: Response) => {
             return new Faculty(res.json());
         });
+    }
+
+    getProgress() {
+        return this.http.get(this._baseURL + '/progress', this.helperService.jwt()).map((res: Response) => {
+            let courses: Course[] = [];
+            let courseData = res.json();
+
+            for (let course of courseData) {
+                courses.push(new Course(course));
+            }
+
+            return courses;
+        })
     }
 }
