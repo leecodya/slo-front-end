@@ -1,3 +1,19 @@
-<p>
-  admin works!
-</p>
+<menu-bar></menu-bar>
+
+<section class="generate-report cf">
+    <div class="section-header">
+      <a class="active">Generate Report</a>
+    </div>
+  
+    <aside>
+      <h1>Export Data to Excel.</h1>
+      <p>This button will generate and give you the option to download an excel document with all the raw and summary data.</p>
+    </aside>
+  
+    <div class="content cf">
+        <alert></alert>
+        <button (click)="generateReport()" class="button export" [disabled]="reportLoading" [ngClass]="{ 'loading': reportLoading }"><img *ngIf="reportLoading" src="assets/Rolling.gif" /><span *ngIf="!reportLoading">Export to Excel</span></button>
+        <a class="file-url" *ngIf="file_url" [href]="file_url">Click here to download your generated report</a>
+    </div>
+    
+  </section>

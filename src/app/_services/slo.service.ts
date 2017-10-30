@@ -32,4 +32,11 @@ export class SLOService {
             return new SLO(res.json());
         });
     }
+
+    getReport() {
+        return this.http.get(this._baseURL + '/report', this.helperService.jwt()).map((res: Response) => {
+            let data = res.json(); // Just one pair: file_url: "/static/slos.xlsx"
+            return { file_url: this._baseURL + data.file_url };
+        });
+    }
 }
