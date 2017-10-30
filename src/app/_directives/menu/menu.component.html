@@ -3,7 +3,7 @@
         <a [routerLink]="['/home']"><img src="assets/mga_crest.png" alt="MGA" class="logo"/></a>
         <nav>
             <a [routerLink]="['/home']" [routerLinkActive]="'is-active'">Home</a>
-            <a [routerLink]="['/admin']" [routerLinkActive]="'is-active'">Admin</a>
+            <a *ngIf="user.user_type === '1'" [routerLink]="['/admin']" [routerLinkActive]="'is-active'">Admin</a>
             <a [routerLink]="['/login']" class="button">Logout</a>
         </nav>
     </div>
