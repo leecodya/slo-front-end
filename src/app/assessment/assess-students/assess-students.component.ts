@@ -207,6 +207,20 @@ export class AssessStudentsComponent implements OnInit {
         event.target.value = "4";
         event.target.select();
       }
+    }
 
+    // gets rubric info based on slo_id that's passed in. Used to create the table
+    getRubric(slo_id, performance_indicator_id) {
+      let slo = this.slos.find(x => x.slo_id == slo_id);
+      let rubric = slo.performance_indicators.find(y => y.performance_indicator_id == performance_indicator_id);
+      return rubric ? rubric : {};
+    }
+
+    showRubric(event) {
+      event.target.parentNode.parentNode.classList.add('show-rubric');
+    }
+
+    hideRubric(event) {
+      event.target.parentNode.parentNode.classList.remove('show-rubric');
     }
 }
