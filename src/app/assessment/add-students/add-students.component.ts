@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
 import { ValidationManager } from 'ng2-validation-manager';
-import { Course, Student } from '../../_models/';
-import { StudentService, AlertService } from '../../_services/';
+import { Course, Student, Assessment } from '../../_models/';
+import { StudentService, AlertService, AssessmentService } from '../../_services/';
 
 
 @Component({
@@ -12,6 +12,9 @@ import { StudentService, AlertService } from '../../_services/';
 
 export class AddStudentsComponent implements OnInit {
     form;
+
+    loadingAssessments: Boolean = true;
+    assessments: Assessment[] = [];
     formLoading: Boolean = false;
 
     @Input()
@@ -25,7 +28,8 @@ export class AddStudentsComponent implements OnInit {
 
     constructor(
         private studentService: StudentService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private assessmentService: AssessmentService
     ) { }
 
     ngOnInit() {
@@ -34,11 +38,46 @@ export class AddStudentsComponent implements OnInit {
             'first_name': 'required',
             'last_name': 'required'
         });
+
+        this.updateAssessments();
     }
 
     ngOnChanges(changes: SimpleChange) {
         if (changes['course'] && ! changes['course'].isFirstChange()) {
             this.course = changes['course'].currentValue;
+        }
+    }
+
+    studentAssessed(student): Boolean {
+        let existingAssessment = this.assessments.filter(x => x.student.student_id == student.student_id);
+        return existingAssessment.length > 0 ? true : false;
+    }
+
+    updateAssessments(retries = 0) {
+        // if course exists, get assessment data for the course
+        if (this.course.crn) {
+            this.loadingAssessments = true;
+            this.assessmentService.getAssessments(this.course).subscribe(
+                data => {
+                    this.assessments = data;
+                    this.loadingAssessments = false;
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loadingAssessments = false;
+                    console.log(error);
+                }
+            );
+        } else {
+            // Perhaps component was just initialized. Unless this is our third time retrying, try again in 300 ms
+            if (retries > 3) {
+                this.loadingAssessments = false;
+                return;
+            } else {
+                setTimeout(() => {
+                    this.updateAssessments(retries + 1);
+                }, 300)
+            }
         }
     }
 
