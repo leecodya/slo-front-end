@@ -1,7 +1,7 @@
 <aside>
     <h1>Let's Assess Your Students</h1>
-    <p>Finally, let’s assess your students for this class. You’ve selected {{ this.course.assigned_slos.length }} SLOs and you have {{ this.course.students.length }} students, so you’ll need to complete {{ this.course.assigned_slos.length * this.course.students.length }} Assessments.</p>
-    <h3>{{ this.assessments.length | number:'2.0-0' }}/{{ this.course.students.length | number:'2.0-0' }} Students Assessed</h3>
+    <p>Finally, let’s assess your students for this class. You’ve selected {{ course.assigned_slos.length }} SLO<span *ngIf="course.assigned_slos.length > 1">s</span> and you have {{ course.students.length }} student<span *ngIf="course.students.length > 1">s</span>, so you’ll need to complete {{ course.assigned_slos.length * course.students.length }} Assessment<span *ngIf="course.assigned_slos.length * course.students.length > 1">s</span>.</p>
+    <h3>{{ this.assessments.length / this.slos.length | number:'2.0-0' }}/{{ this.course.students.length | number:'2.0-0' }} Students Assessed</h3>
     <button class="button" (click)="nextSection()">Next - Leave Comments</button>
 </aside>
     

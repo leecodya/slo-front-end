@@ -15,7 +15,7 @@ import 'rxjs/add/observable/forkJoin';
 export class AssessStudentsComponent implements OnInit {
     @Input()
     course: Course;
-    slos: any; // will be list of SLO[] objects. ForkJoin issues required type: any
+    slos: any = []; // will be list of SLO[] objects. ForkJoin issues required type: any
     assessments: Assessment[] = [];
     selectedStudentId: String;
 

@@ -75,7 +75,6 @@ export class CourseService {
             assigned_slos: assigned_slos
         }
 
-        console.log(courseData);
 
         return this.http.put(this._baseURL + `/course/${course.crn}`, courseData, this.helperService.jwt()).map((res: Response) => {
             return new Course(res.json());
