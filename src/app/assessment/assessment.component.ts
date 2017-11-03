@@ -11,6 +11,7 @@ import { AddStudentsComponent } from './add-students/add-students.component';
 })
 export class AssessmentComponent implements OnInit {
   course: Course = new Course();
+  loadingCourse: Boolean = true;
   currentSection = 'Add Students';
   deleteCourseConfirm: Boolean = false;
 
@@ -25,9 +26,16 @@ export class AssessmentComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       let crn = params['crn'];
 
+      this.loadingCourse = true;
       this.courseService.getCourse(crn).subscribe(
-        data => { this.course = data },
-        error => { console.log(error); }
+        data => { 
+          this.course = data;
+          this.loadingCourse = false;
+        },
+        error => { 
+          console.log(error);
+          this.loadingCourse = false;
+        }
       );
     });
   }

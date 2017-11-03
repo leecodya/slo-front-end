@@ -8,7 +8,7 @@
   <aside>
     <h1>This is Your Class.</h1>
     <p>You are working on completing assessments for this class.  Closing this page at any point will automatically save your information.</p>
-    <button class="delete-course" (click)="deleteCourse()"><span *ngIf="!deleteCourseConfirm">Delete this course?</span><span *ngIf="deleteCourseConfirm">This cannot be reversed. Click again to confirm.</span></button>
+    <button class="delete-course" (click)="deleteCourse()"><span *ngIf="!deleteCourseConfirm">Delete this course?</span><span *ngIf="deleteCourseConfirm">This can't be undone. Click again to confirm.</span></button>
   </aside>
 
   <div class="content cf">
@@ -18,12 +18,18 @@
     </div>
 
   </div>
-  
+
+  <div *ngIf="loadingCourse" class="loader">
+      <p class="loading-text">Loading assessment data...</p>
+      <div id="progress-bar">
+          <div id="loadingProgressG_1" class="progress-bar"></div>
+      </div>
+  </div>
 </section>
 
 
 <section class="current-class cf">
-  <div class="section-header">
+  <div *ngIf="course.crn" class="section-header">
     <a (click)="loadSection('Add Students')" [ngClass]="{ active: currentSection == 'Add Students' }">Add Students</a>
     <a (click)="loadSection('Assess Students')" [ngClass]="{ active: currentSection == 'Assess Students' }">Assess Students</a>
     <a (click)="loadSection('Leave Comments')" [ngClass]="{ active: currentSection == 'Leave Comments' }">Leave Comments</a>
