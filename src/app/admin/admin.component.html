@@ -18,6 +18,19 @@
 </section>
 
 
+<section class="reports cf">
+  <div class="section-header">
+    <a (click)="loadSection('Class Reports')" [ngClass]="{ active: currentSection == 'Class Reports' }">Class Reports</a>
+    <a (click)="loadSection('SLO Reports')" [ngClass]="{ active: currentSection == 'SLO Reports' }">SLO Reports</a>
+  </div>
+  
+  <app-class-reports *ngIf="currentSection == 'Class Reports'"></app-class-reports>
+  <!--<app-add-students *ngIf="currentSection == 'Add Students'" [course]="course" (update)="updateCourse()" (advance)="nextSection()"></app-add-students>
+  <app-assess-students *ngIf="currentSection == 'Assess Students'" [course]="course" (advance)="nextSection()"></app-assess-students>
+  <app-leave-comments *ngIf="currentSection == 'Leave Comments'" [course]="course"></app-leave-comments>-->
+</section>
+
+
 <section class="faculty-progress cf">
   <div class="section-header">
     <a class="active">Faculty Progress</a>
@@ -46,16 +59,3 @@
       </div>
   </div>
 </section>
-
-
-<section class="reports cf">
-    <div class="section-header">
-      <a (click)="loadSection('Class Reports')" [ngClass]="{ active: currentSection == 'Class Reports' }">Class Reports</a>
-      <a (click)="loadSection('SLO Reports')" [ngClass]="{ active: currentSection == 'SLO Reports' }">SLO Reports</a>
-    </div>
-    
-    <app-class-reports *ngIf="currentSection == 'Class Reports'"></app-class-reports>
-    <!--<app-add-students *ngIf="currentSection == 'Add Students'" [course]="course" (update)="updateCourse()" (advance)="nextSection()"></app-add-students>
-    <app-assess-students *ngIf="currentSection == 'Assess Students'" [course]="course" (advance)="nextSection()"></app-assess-students>
-    <app-leave-comments *ngIf="currentSection == 'Leave Comments'" [course]="course"></app-leave-comments>-->
-  </section>

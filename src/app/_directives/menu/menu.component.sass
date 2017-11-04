@@ -4,14 +4,24 @@
     width: 100%
     position: fixed
     z-index: 1
-    bottom: 40px
+    bottom: 0
+    background-color: rgba(0, 0, 0, .7)
+    top: 0
+    left: 0
+    right: 0
 
     .notification
+        user-select: none
+        transition: all .2s ease
         width: 950px
         padding: 15px 20px
         margin: 0 auto
         background-color: #282828
         border-radius: 10px
+        position: absolute
+        bottom: 80px
+        left: 50%
+        transform: translateX(-50%)
 
         p
             position: relative

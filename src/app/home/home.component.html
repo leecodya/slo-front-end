@@ -6,7 +6,7 @@
     <a (click)="loadSection('complete')" [ngClass]="{ active: currentSection == 'complete' }">Complete</a>
   </div>
   <aside>
-    <h1>Hi {{ faculty.first_name }} {{ faculty.last_name }}.</h1>
+    <h1>Hi, {{ faculty.first_name }} {{ faculty.last_name }}.</h1>
     <p *ngIf="currentSection == 'complete'">These are your completed assessments. You don’t need to do anything else for these classes.</p>
     <p *ngIf="currentSection == 'incomplete'">These are your incomplete assessments. Click on them to continue editing.</p>
   </aside>
