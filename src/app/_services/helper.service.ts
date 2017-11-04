@@ -23,4 +23,17 @@ export class HelperService {
         let jwt: JwtHelper = new JwtHelper();
         return jwt.decodeToken(token);
     }
+
+    timeToExpiryInMinutes() {
+        let jwtHelper: JwtHelper = new JwtHelper();
+        let token = JSON.parse(localStorage.getItem('currentUser')).access_token;
+        if (token && !jwtHelper.isTokenExpired(token)) {
+            let currentTime = new Date();
+            let tokenExpiry = jwtHelper.getTokenExpirationDate(token);
+
+            return Math.floor((tokenExpiry.getTime() - currentTime.getTime()) / 1000 / 60);
+        } else {
+            return 0
+        }
+    }
 }

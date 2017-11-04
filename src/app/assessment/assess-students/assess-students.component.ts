@@ -80,7 +80,6 @@ export class AssessStudentsComponent implements OnInit {
       this.formLoading = true;
       let assessmentBatch = [];
       this.form.forEach(individualAssessment => {
-        console.log(this.selectedStudentId);
         let assessment = new Assessment({
           assessment_id: individualAssessment.assessment_id,
           slo: new SLO({ slo_id: individualAssessment.slo_id }),
@@ -100,8 +99,6 @@ export class AssessStudentsComponent implements OnInit {
         newlyCreatedAssessments => {
           this.assessmentService.getAssessments(this.course).subscribe(
             data => {
-              console.log(data);
-              console.log(this.assessments);
               this.assessments = data;
               this.formLoading = false;
               goToNextStudent ? this.nextStudent() : null;
