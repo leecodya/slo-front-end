@@ -52,6 +52,21 @@ body, html
 
         &:focus
             border: 1px solid $c-form-border-active
+        
+        ::placeholder //default
+            color: rgba(255, 255, 255, .4)
+        
+        ::-webkit-input-placeholder //chrome, safari
+            color: rgba(255, 255, 255, .4)
+        
+        ::-moz-placeholder //FireFox
+            color: rgba(255, 255, 255, .4)
+        
+        :-ms-input-placeholder //IE 11
+            color: rgba(255, 255, 255, .4)
+        
+        ::-ms-input-placeholder //Edge
+            color: rgba(255, 255, 255, .4)
     
     button
         background-color: $c-button

@@ -21,6 +21,7 @@ import { AddStudentsComponent } from './assessment/add-students/add-students.com
 import { AssessStudentsComponent } from './assessment/assess-students/assess-students.component';
 import { LeaveCommentsComponent } from './assessment/leave-comments/leave-comments.component';
 import { AdminComponent } from './admin/admin.component';
+import { ClassReportsComponent } from './admin/class-reports/class-reports.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AdminComponent } from './admin/admin.component';
     AddStudentsComponent,
     AssessStudentsComponent,
     LeaveCommentsComponent,
-    AdminComponent
+    AdminComponent,
+    ClassReportsComponent
   ],
   imports: [
     BrowserModule,
