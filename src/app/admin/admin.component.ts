@@ -13,6 +13,7 @@ export class AdminComponent implements OnInit {
   file_url: String = "";
   courses: Course[];
   uniqueFaculty: Faculty[] = [];
+  currentSection: String = 'Class Reports'
 
   constructor(
     private sloService: SLOService,
@@ -57,5 +58,9 @@ export class AdminComponent implements OnInit {
         this.reportLoading = false;
       }
     );
+  }
+
+  loadSection(section) {
+    this.currentSection = section;
   }
 }

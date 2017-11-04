@@ -28,8 +28,8 @@
 </section>
 
 
-<section class="current-class cf">
-  <div *ngIf="course.crn" class="section-header">
+<section *ngIf="course.crn" class="current-class cf">
+  <div class="section-header">
     <a (click)="loadSection('Add Students')" [ngClass]="{ active: currentSection == 'Add Students' }">Add Students</a>
     <a (click)="loadSection('Assess Students')" [ngClass]="{ active: currentSection == 'Assess Students' }">Assess Students</a>
     <a (click)="loadSection('Leave Comments')" [ngClass]="{ active: currentSection == 'Leave Comments' }">Leave Comments</a>
