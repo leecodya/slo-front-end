@@ -25,13 +25,17 @@
 
   <aside>
     <h1>View Faculty Progress</h1>
-    <p>These are the current classes in progress by the various faculty members. Red is incomplete, blue is complete.</p>
+    <p>These are the current classes in progress by the various faculty members. Underlined classes are in-complete.</p>
   </aside>
 
   <div class="content cf">
     <div *ngFor="let faculty of uniqueFaculty" class="faculty-group">
+      <div class="total">
+        <p>{{ getFacultyCourses(faculty).length | number:'2.0-0' }}</p>
+        <p class="subtext">Total Courses</p>
+      </div>
       <h3 class="course-title">{{ faculty.first_name }} {{ faculty.last_name }}</h3>
-      <p class="courses"><span *ngFor="let course of getFacultyCourses(faculty)" [ngClass]="{ 'complete' : course.completion }">{{ course.crn }}</span></p>
+      <p class="courses"><span *ngFor="let course of getFacultyCourses(faculty); let isLast = last" [ngClass]="{ 'complete' : course.completion }">{{ course.crn }}{{ isLast ? '' : ', ' }}</span></p>
     </div>
   </div>
 

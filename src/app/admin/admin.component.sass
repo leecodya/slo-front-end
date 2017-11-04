@@ -29,28 +29,46 @@
 .faculty-progress
 
     .faculty-group
-        margin-top: 40px
+        display: block
+        width: 100%
+        border: 1px solid $c-button
+        margin-left: 20px
+        margin-bottom: 20px
+        padding: 20px 20px
+        border-radius: 15px
+        transition: all .2s ease
 
         h3
             font-family: $f
             font-size: 16px
             font-weight: 500
             color: rgba(255, 255, 255, .9)
-            margin-top: 20px
+        
+        .total
+            font-family: $f
+            font-size: 20px
+            float: right
+            color: rgba(255, 255, 255, .9)
+            font-weight: 500
+            text-align: right
+
+            .subtext
+                font-size: 12px
+                color: rgba(255, 255, 255, .5)
+                font-weight: 400
+                font-style: italic
+                margin-top: 5px
         
         .courses
-            margin-top: 14px
+            margin-top: 5px
 
             span
                 font-family: $f
                 font-weight: 400
                 margin-right: 7px
                 font-size: 14px
-                padding: 5px 10px
-                border-radius: 5px
-                color: rgba(255, 255, 255, .9)
-                background-color: $c-form-bg
-                border: 1px solid $c-error
+                color: rgba(255, 255, 255, .7)
+                text-decoration: underline
 
                 &.complete
-                    border: 1px solid $c-success
+                    text-decoration: none
