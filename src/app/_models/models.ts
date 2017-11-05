@@ -55,6 +55,7 @@ export  class SLO {
     slo_id: String;
     slo_description: String;
     comments: String;
+    total_assessments?: number; // really only for the graphSLOData thing
     performance_indicators: PerformanceIndicator[];
 
     constructor(init?: Partial<SLO>) {

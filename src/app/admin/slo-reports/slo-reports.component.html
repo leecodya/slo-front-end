@@ -1,0 +1,43 @@
+<aside>
+    <h1>SLO Reports</h1>
+    <p>To view aggregate reports for each SLO, select a SLO below. This will pull assessments from classes that are still in-complete.</p>
+    <select class="slo-selector" name="slo-selector" [disabled]="formLoading" [(ngModel)]="selectedSLOId" (change)="loadSelectedSLO($event)">
+        <option *ngFor="let slo of slos" [value]="slo.slo_id">{{ slo.slo_id }} - {{ slo.slo_description }}</option>
+    </select>
+</aside>
+
+<div class="content cf">
+    <div *ngIf="selectedSLO" class="course-card">
+        <img *ngIf="formLoading" src="assets/Rolling.gif" />
+        <div *ngIf="!formLoading" class="total-students">
+            <p>{{ selectedSLO.total_assessments | number:'2.0-0' }}</p>
+            <p class="subtext">Total Assessments</p>
+        </div>
+        <h3 class="course-title">{{ (selectedSLO.slo_description.length > 60) ? (selectedSLO.slo_description | slice:0:60) + '...' : (selectedSLO.slo_description) }} </h3>
+        <p class="course-data"><span class="crn">SLO #{{ selectedSLO.slo_id }}</span></p>
+    </div>
+    
+    <div *ngIf="selectedSLOGraphData" class="graph-container cf">
+        <ngx-charts-bar-horizontal-2d
+        [scheme]="config.colorScheme"
+        [results]="selectedSLOGraphData.slo_data"
+        [gradient]="config.gradient"
+        [barPadding]="config.barPadding"
+        [groupPadding]="config.groupPadding"
+        [xAxis]="config.showXAxis"
+        [yAxis]="config.showYAxis"
+        [legend]="config.showLegend"
+        [showXAxisLabel]="config.showXAxisLabel"
+        [showYAxisLabel]="config.showYAxisLabel"
+        [xAxisLabel]="config.xAxisLabel"
+        [yAxisLabel]="config.yAxisLabel">
+        </ngx-charts-bar-horizontal-2d>
+    </div>
+</div>
+
+<div *ngIf="componentLoading" class="loader">
+        <p class="loading-text">Loading SLO data...</p>
+        <div id="progress-bar">
+            <div id="loadingProgressG_1" class="progress-bar"></div>
+        </div>
+    </div>

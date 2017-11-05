@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { CourseGraphData, Course } from '../_models/';
+import { SLOGraphData, CourseGraphData, Course, SLO } from '../_models/';
 import { HelperService } from './helper.service';
 import { environment } from '../../environments/environment';
 
@@ -17,6 +17,12 @@ export class GraphDataService {
     getCourseData(course: Course) {
         return this.http.get(this._baseURL + `/data/course/${course.crn}`, this.helperService.jwt()).map((res: Response) => {
             return new CourseGraphData(res.json());
+        });
+    }
+
+    getSLOData(slo: SLO) {
+        return this.http.get(this._baseURL + `/data/slo/${slo.slo_id}`, this.helperService.jwt()).map((res: Response) => {
+            return new SLOGraphData(res.json());
         });
     }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter } from '@angular/core';
 import { ValidationManager } from 'ng2-validation-manager';
-import { Course, Student, Assessment, CourseGraphData } from '../../_models/';
-import { StudentService, AlertService, AssessmentService, GraphDataService } from '../../_services/';
+import { AlertService, GraphDataService } from '../../_services/';
+import { Course } from '../../_models/';
+import { CourseGraphData } from '../../_models/graph-data'
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
@@ -22,47 +23,6 @@ export class ClassReportsComponent implements OnInit {
     selectedCourseGraphData = [];
 
     config: any = {
-        results: [{
-            "name": "Germany",
-            "series": [
-              {
-                "name": "2010",
-                "value": 7300000
-              },
-              {
-                "name": "2011",
-                "value": 8940000
-              }
-            ]
-          },
-        
-          {
-            "name": "USA",
-            "series": [
-              {
-                "name": "2010",
-                "value": 7870000
-              },
-              {
-                "name": "2011",
-                "value": 8270000
-              }
-            ]
-          },
-        
-          {
-            "name": "France",
-            "series": [
-              {
-                "name": "2010",
-                "value": 5000002
-              },
-              {
-                "name": "2011",
-                "value": 5800000
-              }
-            ]
-          }],
         showXAxis: true,
         showYAxis: false,
         gradient: false,
@@ -78,9 +38,7 @@ export class ClassReportsComponent implements OnInit {
     }
 
     constructor(
-        private studentService: StudentService,
         private alertService: AlertService,
-        private assessmentService: AssessmentService,
         private graphDataService: GraphDataService
     ) { }
 

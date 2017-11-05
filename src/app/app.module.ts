@@ -21,8 +21,9 @@ import { AssessmentComponent } from './assessment/assessment.component';
 import { AddStudentsComponent } from './assessment/add-students/add-students.component';
 import { AssessStudentsComponent } from './assessment/assess-students/assess-students.component';
 import { LeaveCommentsComponent } from './assessment/leave-comments/leave-comments.component';
-import { AdminComponent } from './admin/admin.component';
 import { ClassReportsComponent } from './admin/class-reports/class-reports.component';
+import { SLOReportsComponent } from './admin/slo-reports/slo-reports.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ClassReportsComponent } from './admin/class-reports/class-reports.compo
     AssessStudentsComponent,
     LeaveCommentsComponent,
     AdminComponent,
-    ClassReportsComponent
+    ClassReportsComponent,
+    SLOReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { ClassReportsComponent } from './admin/class-reports/class-reports.compo
     AuthGuard,
     AdminAuthGuard,
     AlertService,
+    GraphDataService,
     FacultyService,
     AuthenticationService,
     CourseService,
@@ -59,7 +62,6 @@ import { ClassReportsComponent } from './admin/class-reports/class-reports.compo
     StudentService,
     AssessmentService,
     HelperService,
-    GraphDataService
   ],
   bootstrap: [AppComponent]
 })

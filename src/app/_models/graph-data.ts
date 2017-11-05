@@ -18,6 +18,7 @@ export  class SLOGraphData {
     slo_id: String;
     slo_description: String;
     performance_indicators: PerformanceIndicatorGraphData[];
+    total_assessments: number;
 
     constructor(init?: Partial<SLOGraphData>) {
         Object.assign(this, init);
