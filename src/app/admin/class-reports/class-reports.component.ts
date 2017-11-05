@@ -72,7 +72,7 @@ export class ClassReportsComponent implements OnInit {
         xScaleMin: 100,
         showYAxisLabel: false,
         yAxisLabel: 'Performance Indicators',
-        colorScheme: 'cool',
+        colorScheme: 'flame',
         barPadding: 0,
         groupPadding: 32
     }

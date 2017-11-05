@@ -9,6 +9,10 @@
 <div class="content cf">
     <div class="course-card">
         <img *ngIf="formLoading" src="assets/Rolling.gif" />
+        <div *ngIf="!formLoading" class="total-students">
+            <p>{{ selectedCourse.total_completed_students | number:'2.0-0' }}/{{ selectedCourse.total_students | number:'2.0-0' }}</p>
+            <p class="subtext">Students Assessed</p>
+        </div>
         <h3 class="course-title">{{ selectedCourse.course_type }} {{ selectedCourse.course_name }}</h3>
         <p class="course-data"><span class="crn">{{ selectedCourse.crn }}</span> - {{ selectedCourse.completion ? 'Complete' : 'Incomplete' }}</p>
     </div>

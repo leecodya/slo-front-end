@@ -8,6 +8,8 @@ export class Course {
     completion: Boolean;
     assigned_slos: SLO[];
     students: Student[];
+    total_students?: number; // really only available in the progress endpoint -_-
+    total_completed_students?: number; //still only in the progress endpoint
 
     constructor(init?: Partial<Course>) {
         Object.assign(this, init);
