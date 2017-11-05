@@ -9,6 +9,33 @@ body, html
     font-family: $f
     color: rgba(255, 255, 255, .6)
 
+.graph-container
+    .ngx-charts
+        text
+            fill: #A0AABE
+        
+        .gridline-path-vertical
+            stroke-width: 0
+        
+    .chart-legend
+        .legend-labels
+            background: rgba(255, 255, 255, 0.05) !important
+        
+        .legend-item
+            &:hover
+                color: white !important
+        
+        .legend-label
+            &:hover
+                color: white !important
+            
+            .active
+                .legend-label-text
+                    color: white !important
+        
+        .scale-legend-label
+            color: #A0AABE
+
 .button
     color: rgba(255, 255, 255, .5)
     background-color: $c-button

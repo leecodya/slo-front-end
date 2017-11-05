@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -11,7 +12,7 @@ import { MenuComponent } from './_directives/menu/menu.component';
 
 import { AuthGuard } from './_guards/auth.guard';
 import { AdminAuthGuard } from './_guards/admin-auth.guard';
-import { AuthenticationService, HelperService, FacultyService, AlertService, CourseService, SLOService, StudentService, AssessmentService } from './_services/';
+import { AuthenticationService, HelperService, FacultyService, AlertService, CourseService, SLOService, StudentService, AssessmentService, GraphDataService } from './_services/';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -44,7 +45,8 @@ import { ClassReportsComponent } from './admin/class-reports/class-reports.compo
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxChartsModule
   ],
   providers: [
     AuthGuard,
@@ -57,6 +59,7 @@ import { ClassReportsComponent } from './admin/class-reports/class-reports.compo
     StudentService,
     AssessmentService,
     HelperService,
+    GraphDataService
   ],
   bootstrap: [AppComponent]
 })
