@@ -20,17 +20,17 @@ export class SLOReportsComponent implements OnInit {
 
     config: any = {
         showXAxis: true,
-        showYAxis: false,
+        showYAxis: true,
         gradient: false,
-        showLegend: true,
-        showXAxisLabel: false,
+        showLegend: false,
+        showXAxisLabel: true,
         xAxisLabel: 'Percent',
-        xScaleMin: 100,
+        xScaleMax: 100,
         showYAxisLabel: false,
         yAxisLabel: 'Performance Indicators',
         colorScheme: 'flame',
         barPadding: 0,
-        groupPadding: 32
+        groupPadding: 16
     }
 
     constructor(
