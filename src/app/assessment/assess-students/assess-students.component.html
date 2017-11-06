@@ -6,52 +6,52 @@
 </aside>
     
 <div class="content cf">
-        <form class="assess-student-form" (ngSubmit)="save(true)" novalidate>
-            <div class="current-student">
-                <label for="active-student">Currently Assessing</label>
-                <select name="active-student" [disabled]="formLoading" [(ngModel)]="selectedStudentId" (change)="loadSelectedStudent($event)">
-                    <option *ngFor="let student of course.students" [value]="student.student_id">{{ student.student_id }} - {{ student.first_name }} {{ student.last_name }}</option>
-                </select>
-            </div>
-            <alert></alert>
-            <div *ngFor="let slo of form" class="form-row">
-                <div class="section-header">{{ slo.slo_id }} - {{ slo.slo_description }}</div>
+    <form class="assess-student-form" (ngSubmit)="save(true)" novalidate>
+        <div class="current-student">
+            <label for="active-student">Currently Assessing</label>
+            <select name="active-student" [disabled]="formLoading" [(ngModel)]="selectedStudentId" (change)="loadSelectedStudent($event)">
+                <option *ngFor="let student of course.students" [value]="student.student_id">{{ student.student_id }} - {{ student.first_name }} {{ student.last_name }}</option>
+            </select>
+        </div>
+        <alert></alert>
+        <div *ngFor="let slo of form" class="form-row">
+            <div class="section-header">{{ slo.slo_id }} - {{ slo.slo_description }}</div>
 
-                <div *ngFor="let pi of slo.performance_indicators" class="form-group cf">
-                    <label [for]="pi.performance_indicator_id" class="perf_indicator">{{ pi.performance_indicator_description }}</label><!--
-                    --><table class="rubric" *ngIf="getRubric(slo.slo_id, pi.performance_indicator_id) as pi_rubric">
-                            <tr>
-                                <th>Score</th>
-                                <th>Description</th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>{{ pi_rubric.unsatisfactory_description }}</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>{{ pi_rubric.developing_description }}</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>{{ pi_rubric.satisfactory_description }}</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>{{ pi_rubric.exemplary_description }}</td>
-                            </tr>
-                        </table><!--
-                    --><div class="input-wrapper"><input [id]="pi.performance_indicator_id" [name]="pi.performance_indicator_id" [(ngModel)]="pi.score" autocomplete="off" (keyup)="validateInput($event)" (focus)="showRubric($event)" (blur)="hideRubric($event)" type="text"></div>
-                </div>
+            <div *ngFor="let pi of slo.performance_indicators" class="form-group cf">
+                <label [for]="pi.performance_indicator_id" class="perf_indicator">{{ pi.performance_indicator_description }}</label><!--
+                --><table class="rubric" *ngIf="getRubric(slo.slo_id, pi.performance_indicator_id) as pi_rubric">
+                        <tr>
+                            <th>Score</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>{{ pi_rubric.unsatisfactory_description }}</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>{{ pi_rubric.developing_description }}</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>{{ pi_rubric.satisfactory_description }}</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>{{ pi_rubric.exemplary_description }}</td>
+                        </tr>
+                    </table><!--
+                --><div class="input-wrapper"><input [id]="pi.performance_indicator_id" [name]="pi.performance_indicator_id" [(ngModel)]="pi.score" autocomplete="off" (keyup)="validateInput($event, pi)" (change)="validateInput($event, pi)" (focus)="showRubric($event)" (blur)="hideRubric($event)" type="text"></div>
             </div>
+        </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <button type="submit" class="button" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Save Changes & Go to Next Student</span></button>
-                    <button type="button" class="button" (click)="previousStudent()" [disabled]="formLoading">Previous Student</button>
-                </div>
+        <div class="form-row">
+            <div class="form-group">
+                <button type="submit" class="button" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Save Changes & Go to Next Student</span></button>
+                <button type="button" class="button" (click)="previousStudent()" [disabled]="formLoading">Previous Student</button>
             </div>
-        </form>
+        </div>
+    </form>
 </div>
 
 <div *ngIf="loadingAssessments || loadingSlos" class="loader">

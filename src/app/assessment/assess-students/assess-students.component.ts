@@ -192,19 +192,22 @@ export class AssessStudentsComponent implements OnInit {
       });
     }
 
-    validateInput(event) {
+    validateInput(event, pi) {
       let num = parseInt(event.target.value);
       
       if (!num) {
         event.target.value = "1";
+        pi.score = "1";
         event.target.select();
       }
       else if (num < 1) {
         event.target.value = "1";
+        pi.score = "1";
         event.target.select();
       }
       else if (num > 4) {
         event.target.value = "4";
+        pi.score = "4";
         event.target.select();
       }
     }
