@@ -123,11 +123,11 @@ export class SLOReportsComponent implements OnInit {
                 value: isFinite(exemplary_percent) ? exemplary_percent : 0
             });
 
-            pi_data.series.forEach(dataset => {
+            /*pi_data.series.forEach(dataset => {
                 if (dataset.value == 0) {
-                    dataset.value = 1
+                    dataset.value = 1 // Make 0's 1s. Helps visualize empty bars
                 }
-            });
+            });*/
 
             slo_info.slo_data.push(pi_data);
         }

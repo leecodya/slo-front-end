@@ -19,6 +19,16 @@
     
     <div class="graph-container cf" *ngFor="let dataSet of selectedCourseGraphData; let isFirst = first" [ngClass]="{'top-most' : isFirst}">
         <div class="section-header" *ngIf="dataSet">SLO #{{ dataSet.slo_id }} - {{ dataSet.slo_description }}</div>
+        <table>
+            <tr class="header">
+                <th>Performance Indicator</th>
+                <th>Success</th>
+            </tr>
+            <tr *ngFor="let pi of dataSet.slo_data">
+                <td>{{ pi.name }}</td>
+                <td>{{pi.series[2].value + pi.series[3].value }}%</td>
+            </tr>
+        </table>
         <ngx-charts-bar-horizontal-2d
         [scheme]="config.colorScheme"
         [results]="dataSet.slo_data"

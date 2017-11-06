@@ -115,11 +115,11 @@ export class ClassReportsComponent implements OnInit {
                     value: isFinite(exemplary_percent) ? exemplary_percent : 0
                 });
 
-                pi_data.series.forEach(dataset => {
+                /*pi_data.series.forEach(dataset => {
                     if (dataset.value == 0) {
-                        dataset.value = 1
+                        dataset.value = 1 // Make 0's 1's. Helps visualize data
                     }
-                });
+                });*/
 
                 slo_info.slo_data.push(pi_data);
             }
