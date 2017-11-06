@@ -17,7 +17,8 @@
         <p class="course-data"><span class="crn">SLO #{{ selectedSLO.slo_id }}</span></p>
     </div>
 
-    <div *ngIf="selectedSLOGraphData" class="graph-container cf">
+    <div *ngIf="selectedSLOGraphData" class="graph-container top-most cf">
+        <div class="section-header">Both Online & F2F Students</div>
         <table>
             <tr class="header">
                 <th>Performance Indicator</th>
@@ -45,7 +46,68 @@
         [yAxisLabel]="config.yAxisLabel">
         </ngx-charts-bar-horizontal-2d>
     </div>
+
+    <div *ngIf="selectedSLOF2FGraphData" class="graph-container cf">
+        <div class="section-header">F2F Students</div>
+        <table>
+            <tr class="header">
+                <th>Performance Indicator</th>
+                <th>Success</th>
+            </tr>
+            <tr *ngFor="let pi of selectedSLOF2FGraphData.slo_data">
+                <td>{{ pi.name }}</td>
+                <td>{{pi.series[2].value + pi.series[3].value }}%</td>
+            </tr>
+        </table>
+
+        <ngx-charts-bar-horizontal-2d
+        [scheme]="config.colorScheme"
+        [results]="selectedSLOF2FGraphData.slo_data"
+        [gradient]="config.gradient"
+        [barPadding]="config.barPadding"
+        [groupPadding]="config.groupPadding"
+        [xScaleMax]="config.xScaleMax"
+        [xAxis]="config.showXAxis"
+        [yAxis]="config.showYAxis"
+        [legend]="config.showLegend"
+        [showXAxisLabel]="config.showXAxisLabel"
+        [showYAxisLabel]="config.showYAxisLabel"
+        [xAxisLabel]="config.xAxisLabel"
+        [yAxisLabel]="config.yAxisLabel">
+        </ngx-charts-bar-horizontal-2d>
+    </div>
+
+    <div *ngIf="selectedSLOONLINEGraphData" class="graph-container cf">
+        <div class="section-header">Online Students</div>
+        <table>
+            <tr class="header">
+                <th>Performance Indicator</th>
+                <th>Success</th>
+            </tr>
+            <tr *ngFor="let pi of selectedSLOONLINEGraphData.slo_data">
+                <td>{{ pi.name }}</td>
+                <td>{{pi.series[2].value + pi.series[3].value }}%</td>
+            </tr>
+        </table>
+
+        <ngx-charts-bar-horizontal-2d
+        [scheme]="config.colorScheme"
+        [results]="selectedSLOONLINEGraphData.slo_data"
+        [gradient]="config.gradient"
+        [barPadding]="config.barPadding"
+        [groupPadding]="config.groupPadding"
+        [xScaleMax]="config.xScaleMax"
+        [xAxis]="config.showXAxis"
+        [yAxis]="config.showYAxis"
+        [legend]="config.showLegend"
+        [showXAxisLabel]="config.showXAxisLabel"
+        [showYAxisLabel]="config.showYAxisLabel"
+        [xAxisLabel]="config.xAxisLabel"
+        [yAxisLabel]="config.yAxisLabel">
+        </ngx-charts-bar-horizontal-2d>
+    </div>
 </div>
+
 
 <div *ngIf="componentLoading" class="loader">
         <p class="loading-text">Loading SLO data...</p>

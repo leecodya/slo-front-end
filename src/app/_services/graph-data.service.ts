@@ -20,8 +20,13 @@ export class GraphDataService {
         });
     }
 
-    getSLOData(slo: SLO) {
-        return this.http.get(this._baseURL + `/data/slo/${slo.slo_id}`, this.helperService.jwt()).map((res: Response) => {
+    getSLOData(slo: SLO, filter_by=null) {
+        let paramString = '';
+        if (filter_by) {
+            paramString = `?filter_by=${filter_by}`
+        }
+
+        return this.http.get(this._baseURL + `/data/slo/${slo.slo_id}${paramString}`, this.helperService.jwt()).map((res: Response) => {
             return new SLOGraphData(res.json());
         });
     }

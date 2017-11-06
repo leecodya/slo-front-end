@@ -3,6 +3,8 @@ import { SLO } from '../../_models/';
 import { SLOGraphData } from '../../_models/graph-data';
 import { AlertService, SLOService, GraphDataService } from '../../_services/';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
 
 @Component({
   selector: 'app-slo-reports',
@@ -15,7 +17,9 @@ export class SLOReportsComponent implements OnInit {
     formLoading: Boolean = false;
     selectedSLOId: String;
     selectedSLO: SLO;
-    selectedSLOGraphData = null;
+    selectedSLOGraphData = null; // Holds both Online/F2F info
+    selectedSLOF2FGraphData = null; //Just F2F Info
+    selectedSLOONLINEGraphData = null; // Just ONLINE Info
     componentLoading: Boolean = true;
 
     config: any = {
@@ -71,10 +75,18 @@ export class SLOReportsComponent implements OnInit {
 
     loadSLO(slo: SLO) {
         this.formLoading = true;
-        this.graphDataService.getSLOData(slo).subscribe(
-            data => {
-                this.selectedSLO.total_assessments = data.total_assessments;
-                this.processData(data);
+        let sloRequests = [
+            this.graphDataService.getSLOData(slo),
+            this.graphDataService.getSLOData(slo, "F2F"),
+            this.graphDataService.getSLOData(slo, "ONLINE")
+        ];
+
+        Observable.forkJoin(sloRequests).subscribe(
+            slo_data => {
+                this.selectedSLO.total_assessments = slo_data[0].total_assessments;
+                this.selectedSLOGraphData = this.processData(slo_data[0]);
+                this.selectedSLOF2FGraphData = this.processData(slo_data[1]);
+                this.selectedSLOONLINEGraphData = this.processData(slo_data[2]);
                 this.formLoading = false;
             },
             error => {
@@ -132,7 +144,7 @@ export class SLOReportsComponent implements OnInit {
             slo_info.slo_data.push(pi_data);
         }
 
-        this.selectedSLOGraphData = slo_info;
+        return slo_info;
     }
 
 
