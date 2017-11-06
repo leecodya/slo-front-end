@@ -1,5 +1,6 @@
 export class Course {
     crn: String;
+    course_number: String;
     course_name: String;
     course_type: String;
     semester: String;
@@ -79,5 +80,9 @@ export class PerformanceIndicator {
     developing_description: String;
     satisfactory_description: String;
     exemplary_description: String;
+
+    constructor(init?: Partial<PerformanceIndicator>) {
+        Object.assign(this, init);
+    }
 }
 

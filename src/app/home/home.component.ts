@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   currentSection: String = "incomplete"; //section selection variable for courses section
   slos = []; // each object will be { 'slo_id': value, 'slo_description': value, and 'checked': true/false }
   form; //start new assessment form
+  submitLoading: Boolean = false; //if the submit form is active or not
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
     this.form = new ValidationManager({
       'crn': 'required|minLength:5|maxLength:5|number',
       'semester': {'rules': 'required', 'value': 'Fall'},
+      'course_number': 'required|minLength:4|maxLength:4|number',
       'course_year': {'rules': 'required|minLength:4|maxLength:4|number', 'value': '2017'},
       'course_type': {'rules': 'required', 'value': 'F2F'},
       'course_name': 'required'
@@ -104,12 +106,15 @@ export class HomeComponent implements OnInit {
     myCourse.faculty = this.faculty;
     myCourse.course_year = courseEntryDate;
 
+    this.submitLoading = true;
     this.courseService.createCourse(myCourse).subscribe(
       data => {
+        this.submitLoading = false;
         this.alertService.success("Course successfully added");
         this.router.navigate(['/assessment', data.crn]);
       },
       error => {
+        this.submitLoading = false;
         this.alertService.error(error.json().message);
         console.log(error.json());
       }

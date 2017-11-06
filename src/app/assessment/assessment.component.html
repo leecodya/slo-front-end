@@ -14,7 +14,7 @@
   <div class="content cf">
     <div *ngIf="course" class="course-card" [routerLink]="['/assessment', course.crn]">
       <h3 class="course-title">{{ course.course_type }} {{ course.course_name }}</h3>
-      <p class="course-data"><span class="crn">{{ course.crn }} -</span> SLO <span *ngFor="let slo of course.assigned_slos; let isLast=last">#{{ slo.slo_id }}{{isLast ? '' : ', '}}</span></p>
+      <p class="course-data"><span class="crn">ITEC {{ course.course_number }} -</span> SLO <span *ngFor="let slo of course.assigned_slos; let isLast=last">#{{ slo.slo_id }}{{isLast ? '' : ', '}}</span></p>
     </div>
 
   </div>

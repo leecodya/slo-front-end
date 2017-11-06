@@ -34,7 +34,7 @@
     <div class="students" id="students-container">
         <p class="student-heading">Your Students</p>
         <div *ngFor="let student of course.students" (click)="removeStudent(student, course)" [ngClass]="{ 'assessed': studentAssessed(student) }" [id]="student.student_id" class="student">
-            {{ student.student_id }} - {{ student.first_name }} {{ student.last_name }}
+            {{ student.student_id }} - {{ student.last_name }}, {{ student.first_name }}
             <span class="remove">✖</span>
         </div>
     </div>

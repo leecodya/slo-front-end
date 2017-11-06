@@ -1,5 +1,6 @@
 export class CourseGraphData {
     crn: String;
+    course_number: String;
     course_name: String;
     course_type: String;
     semester: String;
@@ -14,7 +15,7 @@ export class CourseGraphData {
 }
 
 
-export  class SLOGraphData {
+export class SLOGraphData {
     slo_id: String;
     slo_description: String;
     performance_indicators: PerformanceIndicatorGraphData[];

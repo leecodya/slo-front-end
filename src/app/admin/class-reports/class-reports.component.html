@@ -2,7 +2,7 @@
     <h1>Class Reports</h1>
     <p>To view individual reports for each class, select a class below. Note that incomplete classes may have invalid data.</p>
     <select class="class-selector" name="class-selector" [disabled]="formLoading" [(ngModel)]="selectedCourseCRN" (change)="loadSelectedCourse($event)">
-        <option *ngFor="let course of courses" [value]="course.crn">{{ course.crn }} - {{ course.course_type }} {{ course.course_name }}</option>
+        <option *ngFor="let course of courses" [value]="course.crn">ITEC {{ course.course_number }} - {{ course.course_type }} {{ course.course_name }}</option>
     </select>
 </aside>
 
@@ -14,11 +14,11 @@
             <p class="subtext">Students Assessed</p>
         </div>
         <h3 class="course-title">{{ selectedCourse.course_type }} {{ selectedCourse.course_name }}</h3>
-        <p class="course-data"><span class="crn">{{ selectedCourse.crn }}</span> - {{ selectedCourse.completion ? 'Complete' : 'Incomplete' }}</p>
+        <p class="course-data"><span class="crn">ITEC {{ selectedCourse.course_number }}</span> - {{ selectedCourse.completion ? 'Complete' : 'Incomplete' }}</p>
     </div>
     
     <div class="graph-container cf" *ngFor="let dataSet of selectedCourseGraphData; let isFirst = first" [ngClass]="{'top-most' : isFirst}">
-        <div class="section-header" *ngIf="dataSet">{{ dataSet.slo_description }}</div>
+        <div class="section-header" *ngIf="dataSet">SLO #{{ dataSet.slo_id }} - {{ dataSet.slo_description }}</div>
         <ngx-charts-bar-horizontal-2d
         [scheme]="config.colorScheme"
         [results]="dataSet.slo_data"

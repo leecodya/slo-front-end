@@ -45,6 +45,7 @@ export class CourseService {
         let courseData = {
             crn: course.crn,
             faculty_id: course.faculty.faculty_id,
+            course_number: course.course_number,
             course_name: course.course_name,
             course_type: course.course_type,
             semester: course.semester,
@@ -68,6 +69,7 @@ export class CourseService {
 
         let courseData = {
             faculty_id: course.faculty.faculty_id,
+            course_number: course.course_number,
             course_name: course.course_name,
             course_type: course.course_type,
             semester: course.semester,

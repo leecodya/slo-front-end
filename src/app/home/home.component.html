@@ -13,7 +13,7 @@
   <div class="content cf">
     <div *ngFor="let course of visibleCourses" class="course-card" [routerLink]="['/assessment', course.crn]">
       <h3 class="course-title">{{ course.course_type }} {{ course.course_name }}</h3>
-      <p class="course-data"><span class="crn">{{ course.crn }} -</span> SLO <span *ngFor="let slo of course.assigned_slos; let isLast=last">#{{ slo.slo_id }}{{isLast ? '' : ', '}}</span></p>
+      <p class="course-data"><span class="crn">ITEC {{ course.course_number }} -</span> SLO <span *ngFor="let slo of course.assigned_slos; let isLast=last">#{{ slo.slo_id }}{{isLast ? '' : ', '}}</span></p>
     </div>
   </div>
   <div *ngIf="loading_courses" class="loader">
@@ -39,9 +39,14 @@
         <alert></alert>
         <div class="form-row">
           <div class="form-group">
-            <label for="crn">Course Number</label>
-            <input type="text" formControlName="crn" name="crn" placeholder="12345" size="10">
+            <label for="crn">CRN</label>
+            <input type="text" formControlName="crn" name="crn" placeholder="12345" size="11">
             <div *ngIf="form.hasError('crn')" class="error">5 digit number</div>
+          </div>
+          <div class="form-group">
+            <label for="course_number">Course Number</label>
+            <input type="text" formControlName="course_number" name="course_number" placeholder="4750" size="11">
+            <div *ngIf="form.hasError('course_number')" class="error">4 digit number</div>
           </div>
           <div class="form-group">
             <label for="semester">Semester</label>
@@ -54,23 +59,23 @@
           </div>
           <div class="form-group">
             <label for="year">Year</label>
-            <input type="text" formControlName="course_year" placeholder="2017" size="8">
+            <input type="text" formControlName="course_year" placeholder="2017" size="10">
             <div *ngIf="form.hasError('course_year')" class="error">4 digit year</div>
-          </div>
-          <div class="form-group">
-            <label for="type">Course Type</label>
-            <select name="type" formControlName="course_type">
-              <option value="F2F">Face-to-Face</option>
-              <option value="Online">Online</option>
-            </select>
-            <div *ngIf="form.hasError('semester')" class="error">Required</div>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
+            <label for="type">Course Type</label>
+            <select name="type" formControlName="course_type">
+              <option value="F2F">Face-to-Face</option>
+              <option value="ONLINE">Online</option>
+            </select>
+            <div *ngIf="form.hasError('course_type')" class="error">Required</div>
+          </div>
+          <div class="form-group">
             <label for="title">Course Title</label>
-            <input type="text" formControlName="course_name" placeholder="Forensics and Data Recovery" size="64">
+            <input type="text" formControlName="course_name" placeholder="Forensics and Data Recovery" size="46">
             <div *ngIf="form.hasError('course_name')" class="error">Required</div>
           </div>
         </div>
@@ -85,7 +90,7 @@
 
         <div class="form-row">
           <div class="form-group">
-            <button type="submit" class="button">Submit</button>
+            <button type="submit" class="button" [disabled]="submitLoading" [ngClass]="{ 'loading': submitLoading }"><img *ngIf="submitLoading" src="assets/Rolling.gif" /><span *ngIf="!submitLoading">Create Course</span></button>
           </div>
         </div>
       </form>

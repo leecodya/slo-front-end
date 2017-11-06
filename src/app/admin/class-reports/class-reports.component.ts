@@ -78,6 +78,7 @@ export class ClassReportsComponent implements OnInit {
         this.selectedCourseGraphData = []; //reset to empty array
         for (let slo of course.assigned_slos) {
             let slo_info = {
+                slo_id: slo.slo_id,
                 slo_description: slo.slo_description,
                 total_students: course.total_students,
                 slo_data: []

@@ -35,7 +35,7 @@
         <p class="subtext">Total Courses</p>
       </div>
       <h3 class="course-title">{{ faculty.first_name }} {{ faculty.last_name }}</h3>
-      <p class="courses"><span *ngFor="let course of getFacultyCourses(faculty); let isLast = last" [ngClass]="{ 'complete' : course.completion }">{{ course.crn }}{{ isLast ? '' : ', ' }}</span></p>
+      <p class="courses"><span *ngFor="let course of getFacultyCourses(faculty); let isLast = last" [ngClass]="{ 'complete' : course.completion }">{{ course.course_type }} {{ course.course_number }}{{ isLast ? '' : ', ' }}</span></p>
     </div>
   </div>
 
