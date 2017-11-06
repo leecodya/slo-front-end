@@ -26,7 +26,7 @@
             </tr>
             <tr *ngFor="let pi of selectedSLOGraphData.slo_data">
                 <td>{{ pi.name }}</td>
-                <td>{{pi.series[2].value + pi.series[3].value }}%</td>
+                <td>{{pi.series[2].value + pi.series[3].value - 1 }}%</td>
             </tr>
         </table>
 
@@ -56,7 +56,7 @@
             </tr>
             <tr *ngFor="let pi of selectedSLOF2FGraphData.slo_data">
                 <td>{{ pi.name }}</td>
-                <td>{{pi.series[2].value + pi.series[3].value }}%</td>
+                <td>{{pi.series[2].value + pi.series[3].value - 1 }}%</td>
             </tr>
         </table>
 
@@ -86,7 +86,7 @@
             </tr>
             <tr *ngFor="let pi of selectedSLOONLINEGraphData.slo_data">
                 <td>{{ pi.name }}</td>
-                <td>{{pi.series[2].value + pi.series[3].value }}%</td>
+                <td>{{pi.series[2].value + pi.series[3].value - 1 }}%</td>
             </tr>
         </table>
 
