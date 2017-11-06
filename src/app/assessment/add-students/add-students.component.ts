@@ -35,8 +35,8 @@ export class AddStudentsComponent implements OnInit {
     ngOnInit() {
         this.form = new ValidationManager({
             'student_id': 'required|minLength:9|maxLength:9|number',
-            'first_name': 'required',
-            'last_name': 'required'
+            'first_name': 'required|maxLength:255',
+            'last_name': 'required|maxLength:255'
         });
 
         this.updateAssessments();

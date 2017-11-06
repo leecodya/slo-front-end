@@ -1,7 +1,7 @@
 <div class="register-container">
   <div class="v-center-container">
     <div class="header">
-      <img class="logo" src="assets/MGSULogo.png" alt="Middle Georgia State University Logo">
+      <img class="logo" src="assets/MGSULogo2.png" alt="Middle Georgia State University Logo">
       <h1>Assessments Matrix</h1>
       <p>Please create a new account.</p>
     </div>
@@ -17,7 +17,7 @@
         <div class="form-group">
             <label for="faculty_id">Faculty ID</label>
             <input type="text" formControlName="faculty_id" name="faculty_id" placeholder="983111222" size="10">
-            <div *ngIf="form.hasError('email')" class="error">9 digit number</div>
+            <div *ngIf="form.hasError('faculty_id')" class="error">9 digit number</div>
         </div>
       </div>
 
