@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
     user: Faculty = new Faculty({ user_type: "0" });
     minutesTillExpiry = 60;
     model: any = {};
+    formLoading: Boolean = false;
     timeouts = [];
 
     constructor(
@@ -51,6 +52,7 @@ export class MenuComponent implements OnInit {
     }
 
     login() {
+        this.formLoading = true;
         this.authenticationService.login(this.user.email.toString(), this.model.password)
           .subscribe(
             data => {
@@ -58,14 +60,17 @@ export class MenuComponent implements OnInit {
                   data => {
                       this.user = data;
                       this.checkExpiry()
+                      this.formLoading = false;
                   },
                   error => {
                       console.log(error);
+                      this.formLoading = false;
                   }
               );
             },
             error => {
                 console.log(error);
+                this.formLoading = false;
                 this.router.navigate(['/login']);
             }
           );

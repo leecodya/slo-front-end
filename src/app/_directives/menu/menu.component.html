@@ -15,7 +15,7 @@
         <p> Your session will expire in {{ minutesTillExpiry }} minutes. Enter password to renew.</p>
         <form (ngSubmit)="f.form.valid && login()" #f="ngForm" class="form-group" novalidate>
             <input class="password" type="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password" name="password" required="required">
-            <button type="submit" class="button">Renew</button>
+            <button type="submit" class="button" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Renew</span></button>
         </form>
     </div>
 </div>
