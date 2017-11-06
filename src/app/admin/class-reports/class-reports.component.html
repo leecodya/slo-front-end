@@ -26,7 +26,7 @@
             </tr>
             <tr *ngFor="let pi of dataSet.slo_data">
                 <td>{{ pi.name }}</td>
-                <td>{{pi.series[2].value + pi.series[3].value - 1 }}%</td>
+                <td>{{( pi.series[2].value == .992012 ? 0 : pi.series[2].value) + (pi.series[3].value == .992012 ? 0 : pi.series[3].value) }}%</td>
             </tr>
         </table>
         <ngx-charts-bar-horizontal-2d

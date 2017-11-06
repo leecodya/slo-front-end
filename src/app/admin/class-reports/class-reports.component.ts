@@ -117,7 +117,7 @@ export class ClassReportsComponent implements OnInit {
 
                 pi_data.series.forEach(dataset => {
                     if (dataset.value == 0) {
-                        dataset.value = 1 // Make 0's 1's. Helps visualize data
+                        dataset.value = .992012 // Make 0's 1's. Helps visualize data. Ultra-specific so that it doesn't conflict with real values
                     }
                 });
 
