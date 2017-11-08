@@ -90,10 +90,10 @@ export class ClassReportsComponent implements OnInit {
                     series: []
                 };
 
-                let unsatisfactory_percent = Math.floor((pi.unsatisfactory / course.total_students) * 100);
-                let developing_percent = Math.floor((pi.developing / course.total_students) * 100);
-                let satisfactory_percent = Math.floor((pi.satisfactory / course.total_students) * 100);
-                let exemplary_percent = Math.floor((pi.exemplary / course.total_students) * 100);
+                let unsatisfactory_percent = Math.round((pi.unsatisfactory / course.total_students) * 100);
+                let developing_percent = Math.round((pi.developing / course.total_students) * 100);
+                let satisfactory_percent = Math.round((pi.satisfactory / course.total_students) * 100);
+                let exemplary_percent = Math.round((pi.exemplary / course.total_students) * 100);
 
                 pi_data.series.push({
                     name: "unsatisfactory",
