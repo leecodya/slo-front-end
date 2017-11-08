@@ -24,12 +24,12 @@
       <div class="form-row">
         <div class="form-group">
             <label for="first_name">First Name</label>
-            <input type="text" formControlName="first_name" name="first_name" placeholder="Deep" size="10">
+            <input type="text" formControlName="first_name" name="first_name" placeholder="John" size="10">
             <div *ngIf="form.hasError('first_name')" class="error">Required</div>
         </div>
         <div class="form-group">
             <label for="last_name">Last Name</label>
-            <input type="text" formControlName="last_name" name="last_name" placeholder="Deep" size="10">
+            <input type="text" formControlName="last_name" name="last_name" placeholder="Smith" size="10">
             <div *ngIf="form.hasError('last_name')" class="error">Required</div>
         </div>
       </div>
@@ -37,12 +37,12 @@
       <div class="form-row">
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" formControlName="password" name="password" size="10">
-            <div *ngIf="form.hasError('password')" class="error">Required</div>
+            <input type="password" formControlName="password" name="password" placeholder="Password" size="10">
+            <div *ngIf="form.hasError('password')" class="error">Minimum 8 chars</div>
         </div>
         <div class="form-group">
             <label for="confirm_password">Confirm Password</label>
-            <input type="password" formControlName="confirm_password" name="confirm_password" size="10">
+            <input type="password" formControlName="confirm_password" placeholder="Password" name="confirm_password" size="10">
             <div *ngIf="form.hasError('confirm_password')" class="error">Must Match</div>
         </div>
       </div>
