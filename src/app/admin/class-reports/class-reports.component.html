@@ -2,7 +2,7 @@
     <h1>Class Reports</h1>
     <p>To view individual reports for each class, select a class below. Note that incomplete classes may have invalid data.</p>
     <select class="class-selector" name="class-selector" [disabled]="formLoading" [(ngModel)]="selectedCourseCRN" (change)="loadSelectedCourse($event)">
-        <option *ngFor="let course of courses" [value]="course.crn">ITEC {{ course.course_number }} - {{ course.course_type }} {{ course.course_name }}</option>
+        <option *ngFor="let course of courses" [value]="course.crn">{{ course.course_year }} ITEC {{ course.course_number }} - {{ course.course_type }} {{ course.course_name }}</option>
     </select>
 </aside>
 

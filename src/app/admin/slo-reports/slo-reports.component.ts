@@ -137,7 +137,7 @@ export class SLOReportsComponent implements OnInit {
 
             pi_data.series.forEach(dataset => {
                 if (dataset.value == 0) {
-                    dataset.value = 1 // Make 0's 1s. Helps visualize empty bars
+                    dataset.value = .992012 // Make 0's 1s. Helps visualize empty bars
                 }
             });
 
