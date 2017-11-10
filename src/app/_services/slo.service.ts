@@ -33,9 +33,15 @@ export class SLOService {
         });
     }
 
-    getReport() {
-        return this.http.get(this._baseURL + '/report', this.helperService.jwt()).map((res: Response) => {
-            let data = res.json(); // Just one pair: file_url: "/static/slos.xlsx"
+    getReport(report_type, year) {
+        console.log(report_type);
+        if (report_type !== 'courses' && report_type !== 'slos') {
+            throw new TypeError("report_type must be courses or slos");
+        }
+
+        let query_string = year ? `?year=${year}` : '';
+        return this.http.get(this._baseURL + '/report/' + report_type + query_string, this.helperService.jwt()).map((res: Response) => {
+            let data = res.json();
             return { file_url: this._baseURL + data.file_url };
         });
     }

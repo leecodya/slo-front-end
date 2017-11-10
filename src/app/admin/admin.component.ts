@@ -14,6 +14,12 @@ export class AdminComponent implements OnInit {
   courses: Course[];
   uniqueFaculty: Faculty[] = [];
   currentSection: String = 'Class Reports'
+  uniqueYears = null;
+  
+  export_form = {
+    course_type: 'courses',
+    year: 'All Years'
+  };
 
   constructor(
     private sloService: SLOService,
@@ -26,6 +32,9 @@ export class AdminComponent implements OnInit {
     this.facultyService.getProgress().subscribe(
       data => {
         this.courses = data;
+
+        //used to populate year dropdown
+        this.uniqueYears = new Set(data.map(x => x.course_year));
 
         // basically populate uniqueFaculty with a list of faculty members WITHOUT duplicates
         for (let course of this.courses) {
@@ -49,7 +58,9 @@ export class AdminComponent implements OnInit {
 
   generateReport() {
     this.reportLoading = true;
-    this.sloService.getReport().subscribe(
+    let year_filter = this.export_form.year == 'All Years' ? null : this.export_form.year;
+
+    this.sloService.getReport(this.export_form.course_type, year_filter).subscribe(
       data => {
         this.file_url = data.file_url;
         this.reportLoading = false;
