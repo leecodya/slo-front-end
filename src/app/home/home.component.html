@@ -59,7 +59,7 @@
           </div>
           <div class="form-group">
             <label for="year">Year</label>
-            <input type="text" formControlName="course_year" placeholder="2017" size="10">
+            <input type="text" formControlName="course_year" placeholder="2017" size="9">
             <div *ngIf="form.hasError('course_year')" class="error">4 digit year</div>
           </div>
         </div>
@@ -75,8 +75,8 @@
           </div>
           <div class="form-group">
             <label for="title">Course Title</label>
-            <input type="text" formControlName="course_name" placeholder="Forensics and Data Recovery" size="46">
-            <div *ngIf="form.hasError('course_name')" class="error">Required</div>
+            <input type="text" formControlName="course_name" placeholder="Forensics and Data Recovery" size="45">
+            <div *ngIf="form.hasError('course_name')" class="error">Required, Max 255 chars</div>
           </div>
         </div>
 

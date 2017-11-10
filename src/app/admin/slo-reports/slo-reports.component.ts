@@ -110,10 +110,10 @@ export class SLOReportsComponent implements OnInit {
                 series: []
             };
 
-            let unsatisfactory_percent = Math.floor((pi.unsatisfactory / slo.total_assessments) * 100);
-            let developing_percent = Math.floor((pi.developing / slo.total_assessments) * 100);
-            let satisfactory_percent = Math.floor((pi.satisfactory / slo.total_assessments) * 100);
-            let exemplary_percent = Math.floor((pi.exemplary / slo.total_assessments) * 100);
+            let unsatisfactory_percent = Math.round((pi.unsatisfactory / slo.total_assessments) * 100);
+            let developing_percent = Math.round((pi.developing / slo.total_assessments) * 100);
+            let satisfactory_percent = Math.round((pi.satisfactory / slo.total_assessments) * 100);
+            let exemplary_percent = Math.round((pi.exemplary / slo.total_assessments) * 100);
 
             pi_data.series.push({
                 name: "unsatisfactory",

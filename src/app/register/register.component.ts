@@ -22,9 +22,9 @@ export class RegisterComponent implements OnInit {
     this.form = new ValidationManager({
       'email': 'required|email',
       'faculty_id': 'required|minLength:9|maxLength:9|number',
-      'first_name': {'rules': 'required', 'value': 'Deep'},
-      'last_name': {'rules': 'required', 'value': 'Patel'},
-      'password': 'required',
+      'first_name': {'rules': 'required', 'value': ''},
+      'last_name': {'rules': 'required', 'value': ''},
+      'password': 'required|rangeLength:8,50',
       'confirm_password': 'required|equalTo:password'
     });
   }

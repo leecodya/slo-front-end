@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
       'course_number': 'required|minLength:4|maxLength:4|number',
       'course_year': {'rules': 'required|minLength:4|maxLength:4|number', 'value': '2017'},
       'course_type': {'rules': 'required', 'value': 'F2F'},
-      'course_name': 'required'
+      'course_name': 'required|maxLength:255'
     });
 
     this.loading_courses = true;
