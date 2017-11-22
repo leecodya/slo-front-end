@@ -7,7 +7,6 @@
       </div>
 
       <form (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-        <alert></alert>
         <div class="form-group">
           <div *ngIf="f.submitted && !email.valid" class="error">Email is required</div>
           <input class="email" type="email" [(ngModel)]="model.email" name="email" placeholder="Email" autofocus #email="ngModel" required="required">

@@ -5,14 +5,25 @@
     font-family: $f
     font-weight: 400
     font-size: 14px
-    padding: 15px 20px
-    color: white
-    
+    padding: 15px 20px 20px 20px
+    color: rgba(0, 0, 0, .8)
+    background-color: #F2D126
+    position: fixed
+    top: -100px
+    left: 50%
+    transform: translateX(-50%)
+    border-bottom-left-radius: 7px
+    border-bottom-right-radius: 7px
+    z-index: 1
+    font-weight: 500
+    transition: all .2s ease
+
     &.alert-success
-        color: $c-success
+        top: 0
+        background-color: #5cab7d
+        color: rgba(255, 255, 255, .90)
     
     &.alert-danger
-        color: $c-error
-
-    +large-tablet
-        font-size: 14px
+        top: 0
+        background-color: #a54657
+        color: rgba(255, 255, 255, .90)

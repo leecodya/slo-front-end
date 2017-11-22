@@ -6,7 +6,6 @@
         
 <div class="content cf">
     <form class="leave-comments-form" (ngSubmit)="submit()" novalidate>
-        <alert></alert>
         <div *ngFor="let slo of course.assigned_slos" class="form-row">
             <div class="section-header">{{ slo.slo_id }} - {{ slo.slo_description }}</div>
             <textarea [name]="slo.slo_id" [(ngModel)]="slo.comments" placeholder="Optional Comments Concerning SLO {{slo.slo_id}} Here" autocomplete="off" type="text"></textarea>
