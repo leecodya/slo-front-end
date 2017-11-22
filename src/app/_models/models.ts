@@ -55,7 +55,9 @@ export class Student {
 export  class SLO {
     slo_id: String;
     slo_description: String;
+    archived: Boolean;
     comments: String;
+    total_performance_indicators?: number; // computed column. only for GET /slos endpoint
     total_assessments?: number; // really only for the graphSLOData thing
     performance_indicators: PerformanceIndicator[];
 

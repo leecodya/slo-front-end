@@ -70,7 +70,11 @@ export class HomeComponent implements OnInit {
 
     this.sloService.getSLOS().subscribe(
       data => {
-        data.forEach(x => this.slos.push({ 'slo_id': x.slo_id, 'slo_description': x.slo_description, 'checked': false }));
+        data.filter(x => !x.archived).forEach(x => this.slos.push({ 
+          'slo_id': x.slo_id, 
+          'slo_description': x.slo_description, 
+          'checked': false 
+        }));
         this.loading_slos = false;
       },
       error => {

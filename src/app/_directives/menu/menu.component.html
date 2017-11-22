@@ -4,7 +4,7 @@
         <nav>
             <a [routerLink]="['/home']" [routerLinkActive]="'is-active'">Home</a>
             <a *ngIf="user.user_type === '1'" [routerLink]="['/admin']" [routerLinkActive]="'is-active'">Admin</a>
-            <a *ngIf="user.user_type === '1'" [routerLink]="['/slo']" [routerLinkActive]="'is-active'">SLOs</a>
+            <a *ngIf="user.user_type === '1'" [routerLink]="['/slos']" [routerLinkActive]="'is-active'">SLOs</a>
             <a [routerLink]="['/login']" class="button">Logout</a>
         </nav>
     </div>

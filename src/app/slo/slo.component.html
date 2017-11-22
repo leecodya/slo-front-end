@@ -1,5 +1,31 @@
 <menu-bar></menu-bar>
 
-<p>
-  slo works!
-</p>
+<section class="slo-select cf">
+  <div class="section-header">
+    <a (click)="loadSection('active')" [ngClass]="{ active: currentSection == 'active' }">Active SLOs</a>
+    <a (click)="loadSection('archived')" [ngClass]="{ active: currentSection == 'archived' }">Archived SLOs</a>
+  </div>
+
+  <aside>
+    <h1>{{ currentSection == 'active' ? 'Active' : 'Archived' }} SLOs.</h1>
+    <p *ngIf="currentSection == 'active'">These are the currently active SLOs. Click to edit them.</p>
+    <p *ngIf="currentSection == 'archived'">These are the archived SLOs. Click to edit them.</p>
+  </aside>
+
+  <div class="content cf">
+    <div *ngFor="let slo of visible_slos" class="slo-group cf" [routerLink]="['/slo', slo.slo_id]">
+      <div class="total">
+        <p>{{ slo.total_performance_indicators | number:'2.0-0' }}</p>
+        <p class="subtext">Performance Indicators</p>
+      </div>
+      <h3 class="course-title">{{ slo.slo_id }} - {{ slo.slo_description }}</h3>
+    </div>
+  </div>
+
+  <div *ngIf="loadingSLOs" class="loader">
+      <p class="loading-text">Loading slo data...</p>
+      <div id="progress-bar">
+          <div id="loadingSLOsG_1" class="progress-bar"></div>
+      </div>
+  </div>
+</section>

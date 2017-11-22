@@ -1,0 +1,40 @@
+@import 'variables'
+
+.slo-select
+
+    .slo-group
+        display: block
+        border: 1px solid $c-button
+        margin-left: 20px
+        margin-bottom: 20px
+        padding: 20px 20px
+        border-radius: 15px
+        transition: all .2s ease
+        display: inline-block
+        width: 100%
+
+        &:hover
+            cursor: pointer
+            transform: scale(1.05)
+
+        h3
+            font-family: $f
+            font-size: 14px
+            font-weight: 400
+            line-height: 18px
+            color: rgba(255, 255, 255, .9)
+        
+        .total
+            font-family: $f
+            font-size: 20px
+            float: right
+            color: rgba(255, 255, 255, .9)
+            font-weight: 500
+            text-align: right
+
+            .subtext
+                font-size: 12px
+                color: rgba(255, 255, 255, .5)
+                font-weight: 400
+                font-style: italic
+                margin-top: 5px

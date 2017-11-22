@@ -31,7 +31,12 @@ const routes: Routes = [
     canActivate: [AdminAuthGuard]
   },
   {
-    path: 'slo',
+    path: 'slos',
+    component: SLOComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
+    path: 'slo/:slo_id',
     component: SLOComponent,
     canActivate: [AdminAuthGuard]
   },
