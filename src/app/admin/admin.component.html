@@ -12,11 +12,11 @@
 
   <div class="content cf">
     <button (click)="generateReport()" class="button export" [disabled]="reportLoading" [ngClass]="{ 'loading': reportLoading }"><img *ngIf="reportLoading" src="assets/Rolling.gif" /><span *ngIf="!reportLoading">Export to Excel</span></button>
-    <select name="year" [(ngModel)]="export_form.year">
+    <select name="year" [(ngModel)]="export_form.year" [disabled]="reportLoading">
       <option value="All Years" selected="selected">All Years</option>
       <option *ngFor="let year of uniqueYears" [value]="year">{{ year }}</option>
     </select>
-    <select name="course_type" [(ngModel)]="export_form.course_type">
+    <select name="course_type" [(ngModel)]="export_form.course_type" [disabled]="reportLoading">
       <option value="courses">Courses</option>
       <option value="slos">SLOs</option>
     </select>
@@ -40,6 +40,9 @@
   <aside>
     <h1>View Faculty Progress</h1>
     <p>These are the current classes in progress by the various faculty members. <span class="highlight">Highlighted</span> classes are in-complete.</p>
+    <select name="faculty_progress_year" [(ngModel)]="faculty_progress_year" (change)="updateFacultyProgress()">
+      <option *ngFor="let year of uniqueYears" [value]="year">{{ year }}</option>
+    </select>
   </aside>
 
   <div class="content cf">
