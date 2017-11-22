@@ -24,6 +24,7 @@ import { LeaveCommentsComponent } from './assessment/leave-comments/leave-commen
 import { ClassReportsComponent } from './admin/class-reports/class-reports.component';
 import { SLOReportsComponent } from './admin/slo-reports/slo-reports.component';
 import { AdminComponent } from './admin/admin.component';
+import { SLOComponent } from './slo/slo.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AdminComponent } from './admin/admin.component';
     LeaveCommentsComponent,
     AdminComponent,
     ClassReportsComponent,
-    SLOReportsComponent
+    SLOReportsComponent,
+    SLOComponent
   ],
   imports: [
     BrowserModule,

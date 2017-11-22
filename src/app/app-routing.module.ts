@@ -5,6 +5,7 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { RegisterComponent } from './register/register.component';
+import { SLOComponent } from './slo/slo.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AdminAuthGuard } from './_guards/admin-auth.guard';
 
@@ -30,6 +31,11 @@ const routes: Routes = [
     canActivate: [AdminAuthGuard]
   },
   {
+    path: 'slo',
+    component: SLOComponent,
+    canActivate: [AdminAuthGuard]
+  },
+  {
     path: 'login',
     component: LoginComponent
   },
@@ -43,4 +49,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
