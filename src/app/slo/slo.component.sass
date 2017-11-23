@@ -5,7 +5,7 @@
     .slo-group
         display: block
         border: 1px solid $c-button
-        margin-left: 20px
+        margin-left: 0
         margin-bottom: 20px
         padding: 20px 20px
         border-radius: 15px
@@ -38,3 +38,86 @@
                 font-weight: 400
                 font-style: italic
                 margin-top: 5px
+
+
+.new-slo
+    .form-group
+        margin-top: 20px
+
+    .slo-section
+        .form-group
+            margin-top: 0
+
+        .slo-id
+            width: 50px
+            display: inline-block
+            margin-right: 20px
+        
+        .slo-title
+            width: 525px
+            display: inline-block
+        
+        textarea
+            height: 75px
+
+        input
+            height: 75px
+            width: 100%
+
+    .pi-indicators
+        .section-header
+            margin-top: 30px
+            margin-bottom: 0
+            font-size: 12px
+        
+        button
+            font-style: italic
+
+            &:hover, &:focus
+                text-decoration: underline
+
+        textarea
+            height: 75px
+
+        .pi-desc
+            display: inline-block
+            width: 200px
+            height: 433px
+            margin-right: 20px
+
+            textarea
+                height: 100%
+        
+        .pi-scales
+            display: inline-block
+            width: 375px
+
+    textarea
+        font-family: $f
+        font-weight: 400
+        font-size: 14px
+        width: 100%
+        color: rgba(255, 255, 255, .9)
+        background-color: $c-form-bg
+        padding: 10px 15px
+        border: 1px solid $c-form-border
+
+        &:focus
+            background-color: $c-button
+    
+    .button-group
+        margin-top: 30px
+
+        .button
+            margin-right: 12px
+            background-color: $c-main
+            border: 1px solid $c-form-border
+
+            &:hover, &:focus
+                background-color: $c-button
+        
+        .button.submit
+            background-color: $c-button
+            
+            &:hover, &:focus
+                background-color: $c-form-bg

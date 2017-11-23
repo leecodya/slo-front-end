@@ -33,6 +33,22 @@ export class SLOService {
         });
     }
 
+    createSLO(slo: SLO) {
+        console.log(slo);
+        let slo_data = {
+            slo_id: slo.slo_id,
+            slo_description: slo.slo_description,
+            performance_indicators: slo.performance_indicators.map(x => {
+                x.performance_indicator_id = slo.slo_id + "-" + x.performance_indicator_id.toString();
+                return x;
+            })
+        }
+
+        return this.http.post(this._baseURL + '/slos', slo_data, this.helperService.jwt()).map((res: Response) => {
+            return new SLO(res.json());
+        });
+    }
+
     getReport(report_type, year) {
         console.log(report_type);
         if (report_type !== 'courses' && report_type !== 'slos') {
