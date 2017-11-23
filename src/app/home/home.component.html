@@ -7,8 +7,8 @@
   </div>
   <aside>
     <h1>Hi, {{ faculty.first_name }} {{ faculty.last_name }}.</h1>
-    <p *ngIf="currentSection == 'complete'">These are your completed assessments. You don’t need to do anything else for these classes.</p>
-    <p *ngIf="currentSection == 'incomplete'">These are your incomplete assessments. Click on them to continue editing.</p>
+    <p *ngIf="currentSection == 'complete'">These are your completed courses. You don’t need to do anything else for these courses.</p>
+    <p *ngIf="currentSection == 'incomplete'">These are your incomplete courses. Click on them to continue filling out assessments.</p>
   </aside>
   <div class="content cf">
     <div *ngFor="let course of visibleCourses" class="course-card" [routerLink]="['/assessment', course.crn]">
@@ -26,7 +26,7 @@
 
 <section class="new-assessment cf">
   <div class="section-header">
-    <a class="active">Start New Assessment</a>
+    <a class="active">Create New Course</a>
   </div>
 
   <aside>

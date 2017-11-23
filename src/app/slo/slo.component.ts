@@ -3,6 +3,7 @@ import { Course, Faculty, SLO } from '../_models';
 import { AuthenticationService, CourseService, AlertService, SLOService, FacultyService } from '../_services';
 import { Router } from '@angular/router';
 import { ValidationManager } from 'ng2-validation-manager';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-slo',
@@ -14,6 +15,7 @@ export class SLOComponent implements OnInit {
   loadingSLOs: Boolean = true; //loading variable for booleans
   slos: SLO[] = []; //holds loaded SLOs
   visible_slos: SLO[] = [];
+  newSLOForm: FormGroup;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -21,10 +23,18 @@ export class SLOComponent implements OnInit {
     private courseService: CourseService,
     private sloService: SLOService,
     private facultyService: FacultyService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.newSLOForm = this.formBuilder.group({
+      slo_id: '',
+      slo_title: '',
+      slo_description: '',
+      performance_indicators: this.formBuilder.array([ this.createPIFormGroup() ])
+    })
+
     this.loadingSLOs = true;
     this.sloService.getSLOS().subscribe(
       data => {
@@ -37,6 +47,23 @@ export class SLOComponent implements OnInit {
         this.loadingSLOs = false;
       }
     );
+  }
+
+  createPIFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      pi_id: '',
+      pi_title: '',
+      pi_description: '',
+      unsatisfactory: '',
+      developing: '',
+      satisfactory: '',
+      exemplary: ''
+    });
+  }
+
+  addEmptyPIFormGroup(): void {
+    let items = this.newSLOForm.get('performance_indicators') as FormArray;
+    items.push(this.createPIFormGroup());
   }
 
   loadSection(section) {
