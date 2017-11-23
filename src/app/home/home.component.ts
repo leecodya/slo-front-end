@@ -68,6 +68,7 @@ export class HomeComponent implements OnInit {
       }
     );
 
+    this.loading_slos = true;
     this.sloService.getSLOS().subscribe(
       data => {
         data.filter(x => !x.archived).forEach(x => this.slos.push({ 

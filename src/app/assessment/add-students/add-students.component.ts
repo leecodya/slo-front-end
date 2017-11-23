@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, OnChanges, SimpleChange, EventEmitter
 import { ValidationManager } from 'ng2-validation-manager';
 import { Course, Student, Assessment } from '../../_models/';
 import { StudentService, AlertService, AssessmentService } from '../../_services/';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -79,6 +80,36 @@ export class AddStudentsComponent implements OnInit {
                 }, 300)
             }
         }
+    }
+
+    removeStudentConfirm(student: Student, course: Course) {
+        let that = this;
+        swal({
+            title: `Delete ${student.first_name} ${student.last_name}?`,
+            text: "This cannot be undone, and you will lose any assessments completed for this student.",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete Student',
+            confirmButtonColor: '#623890',
+            cancelButtonText: 'Keep Student',
+            cancelButtonColor: '#414141',
+            customClass: 'sweet-alert-modal',
+            background: '#292929'
+          }).then(function (result) {
+            if (result.value) {
+                that.removeStudent(student, course);
+                
+                swal({
+                    title: 'Deleted!',
+                    text: "Your student has been removed.",
+                    type: 'success',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: '#623890',
+                    customClass: 'sweet-alert-modal',
+                    background: '#292929'
+                });
+            }
+          });
     }
 
     removeStudent(student: Student, course: Course) {

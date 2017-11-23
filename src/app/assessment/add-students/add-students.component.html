@@ -24,7 +24,6 @@
                 <div *ngIf="form.hasError('first_name')" class="error">required</div>
             </div>
             <div class="form-group">
-                
                 <button type="submit" class="button" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Submit</span></button>
             </div>
         </div>
@@ -32,7 +31,7 @@
 
     <div class="students" id="students-container">
         <p class="student-heading">Your Students</p>
-        <div *ngFor="let student of course.students" (click)="removeStudent(student, course)" [ngClass]="{ 'assessed': studentAssessed(student) }" [id]="student.student_id" class="student">
+        <div *ngFor="let student of course.students" (click)="removeStudentConfirm(student, course)" [ngClass]="{ 'assessed': studentAssessed(student) }" [id]="student.student_id" class="student">
             {{ student.student_id }} - {{ student.last_name }}, {{ student.first_name }}
             <span class="remove">✖</span>
         </div>
