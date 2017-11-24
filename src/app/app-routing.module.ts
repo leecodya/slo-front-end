@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { RegisterComponent } from './register/register.component';
 import { SLOComponent } from './slo/slo.component';
+import { EditSLOComponent } from './edit-slo/edit-slo.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AdminAuthGuard } from './_guards/admin-auth.guard';
 
@@ -37,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'slo/:slo_id',
-    component: SLOComponent,
+    component: EditSLOComponent,
     canActivate: [AdminAuthGuard]
   },
   {

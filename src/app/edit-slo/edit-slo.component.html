@@ -1,63 +1,33 @@
 <menu-bar></menu-bar>
 
-<section class="slo-select cf">
+<section class="edit-slo cf">
   <div class="section-header">
-    <a (click)="loadSection('active')" [ngClass]="{ active: currentSection == 'active' }">Active SLOs</a>
-    <a (click)="loadSection('archived')" [ngClass]="{ active: currentSection == 'archived' }">Archived SLOs</a>
+    <a class="active">Edit SLO</a>
   </div>
 
   <aside>
-    <h1>{{ currentSection == 'active' ? 'Active' : 'Archived' }} SLOs.</h1>
-    <p *ngIf="currentSection == 'active'">These are the currently active SLOs. Click to edit them.</p>
-    <p *ngIf="currentSection == 'archived'">These are the archived SLOs. Click to edit them.</p>
+    <h1>Edit this SLO</h1>
+    <p>Use this form to modify a Student Learning Objective.</p>
   </aside>
 
   <div class="content cf">
-    <div *ngFor="let slo of visible_slos" class="slo-group cf" [routerLink]="['/slo', slo.slo_id]">
-      <div class="total">
-        <p>{{ slo.total_performance_indicators | number:'2.0-0' }}</p>
-        <p class="subtext">Performance Indicators</p>
-      </div>
-      <h3 class="course-title">{{ slo.slo_id }} - {{ slo.slo_description }}</h3>
-    </div>
-  </div>
-
-  <div *ngIf="loadingSLOs" class="loader">
-      <p class="loading-text">Loading slo data...</p>
-      <div id="progress-bar">
-          <div id="loadingSLOsG_1" class="progress-bar"></div>
-      </div>
-  </div>
-</section>
-
-<section class="new-slo cf">
-  <div class="section-header">
-    <a class="active">Create New SLO</a>
-  </div>
-
-  <aside>
-    <h1>Create a new SLO</h1>
-    <p>Fill out this form in order to create a new Student Learning Objective.</p>
-  </aside>
-
-  <div class="content cf">
-    <form [formGroup]="newSLOForm" (ngSubmit)="submit(newSLOForm.value)">
+    <form [formGroup]="editSLOForm" (ngSubmit)="submit(editSLOForm.value)">
       <div class="slo-section">
-        <div class="form-group slo-id">
+        <!--<div class="form-group slo-id">
           <label>SLO Id</label>
-          <input type="text" placeholder="01" [formControl]="newSLOForm.controls['slo_id']" maxlength="2">
-          <div class="error" *ngIf="!newSLOForm.controls['slo_id'].valid && newSLOForm.controls['slo_id'].touched">2 chars</div>
-        </div>
+          <input type="text" placeholder="01" [formControl]="editSLOForm.controls['slo_id']" maxlength="2">
+          <div class="error" *ngIf="!editSLOForm.controls['slo_id'].valid && editSLOForm.controls['slo_id'].touched">2 chars</div>
+        </div>-->
         <div class="form-group slo-title">
           <label>SLO Description</label>
-          <textarea placeholder="Identify and apply current technical concepts in the core information technologies." [formControl]="newSLOForm.controls['slo_description']"></textarea>
-          <div class="error" *ngIf="!newSLOForm.controls['slo_description'].valid && newSLOForm.controls['slo_description'].touched">Required maximum 255 characters long</div>
+          <textarea placeholder="Identify and apply current technical concepts in the core information technologies." [formControl]="editSLOForm.controls['slo_description']"></textarea>
+          <div class="error" *ngIf="!editSLOForm.controls['slo_description'].valid && editSLOForm.controls['slo_description'].touched">Required maximum 255 characters long</div>
         </div>
       </div>
 
       <div class="pi-indicators">
-        <div formArrayName="performance_indicators" *ngFor="let item of newSLOForm.get('performance_indicators').controls; let i = index;" class="pi-indicator-section cf">
-            <div class="section-header">{{ newSLOForm.controls['slo_id'].value }}-{{ item.controls['performance_indicator_id'].value }} Performance Indicator <button type="button" (click)="removePI(i)">(Delete this performance indicator)</button></div>
+        <div formArrayName="performance_indicators" *ngFor="let item of editSLOForm.get('performance_indicators').controls; let i = index;" class="pi-indicator-section cf">
+            <div class="section-header">{{ editSLOForm.controls['slo_id'].value }}-{{ item.controls['performance_indicator_id'].value }} Performance Indicator <button type="button" (click)="removePI(i)">(Delete this performance indicator)</button></div>
           <div class="pi-group-wrapper cf" [formGroupName]="i">
             <div class="form-group pi-desc">
               <label>PI Description</label>
@@ -97,7 +67,7 @@
     </form>  
   </div>
 
-  <div *ngIf="loadingSLOs" class="loader">
+  <div *ngIf="loadingSLO" class="loader">
       <p class="loading-text">Loading slo data...</p>
       <div id="progress-bar">
           <div id="loadingSLOsG_1" class="progress-bar"></div>
