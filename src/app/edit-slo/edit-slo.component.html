@@ -61,8 +61,8 @@
       </div>
 
       <div class="button-group">
-        <button type="button" class="button" (click)="addPI()">Add Performance Indicator</button>
-        <button type="submit" class="button submit">Submit</button>
+        <button type="button" class="button" [disabled]="submitLoading" (click)="addPI()">Add Performance Indicator</button>
+        <button type="submit" class="button submit" [disabled]="submitLoading" [ngClass]="{ 'loading': submitLoading }"><img *ngIf="submitLoading" src="assets/Rolling.gif" /><span *ngIf="!submitLoading">Update SLO</span></button>
       </div>
     </form>  
   </div>

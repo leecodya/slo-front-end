@@ -17,6 +17,7 @@ export class SLOComponent implements OnInit {
   slos: SLO[] = []; //holds loaded SLOs
   visible_slos: SLO[] = [];
   newSLOForm: FormGroup;
+  submitLoading: Boolean;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -82,10 +83,12 @@ export class SLOComponent implements OnInit {
 
   submit(formValue) {
     console.log(formValue);
+    this.submitLoading = true;
 
     if (this.newSLOForm.valid) {
       if (!this.sloIDIsUnique(formValue.slo_id)) {
         this.alertService.error(`SLO ID must be unique! The SLO with the ID ${formValue.slo_id} already exists.`);
+        this.submitLoading = false;
         return;
       }
 
@@ -93,15 +96,18 @@ export class SLOComponent implements OnInit {
       this.sloService.createSLO(slo).subscribe(
         data => {
           this.alertService.success("SLO successfully created.", true);
+          this.submitLoading = false;
           this.router.navigate(['/slo', data.slo_id]);
         },
         error => {
           this.alertService.error(error.message);
+          this.submitLoading = false;
           console.log(error);
         }
       )
     } else {
       this.markFormGroupTouched(this.newSLOForm);
+      this.submitLoading = false;
     }
   }
 

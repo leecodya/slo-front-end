@@ -17,6 +17,7 @@ export class EditSLOComponent implements OnInit {
   slos: SLO[] = []; //holds loaded SLOs
   selectedSLO: SLO;
   editSLOForm: FormGroup;
+  submitLoading: Boolean; //tracks when form submit button is pressed to show loading indicator
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -112,10 +113,12 @@ export class EditSLOComponent implements OnInit {
 
   submit(formValue) {
     console.log(formValue);
+    this.submitLoading = true;
 
     if (this.editSLOForm.valid) {
       if (!this.sloIDMatches(formValue.slo_id)) {
         this.alertService.error(`You cannot change the SLO ID!`);
+        this.submitLoading = false;
         return;
       }
 
@@ -124,15 +127,18 @@ export class EditSLOComponent implements OnInit {
         data => {
           this.alertService.success("SLO successfully updated.", true);
           this.initializeForm(data);
+          this.submitLoading = false;
           //this.router.navigate(['/slo', data.slo_id]);
         },
         error => {
           this.alertService.error(error.json().message);
           console.log(error.json());
+          this.submitLoading = false;
         }
       )
     } else {
       this.markFormGroupTouched(this.editSLOForm);
+      this.submitLoading = false;
     }
   }
 
