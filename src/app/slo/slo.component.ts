@@ -140,12 +140,12 @@ export class SLOComponent implements OnInit {
     let that = this;
     swal({
         title: `Are You Sure?`,
-        text: "This will delete the last performance indicator form group. You will lose anything typed in that group.",
+        text: "This will delete the selected performance indicator. You will lose anything entered in this performance indicator.",
         type: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Delete Last PI',
+        confirmButtonText: 'Delete',
         confirmButtonColor: '#623890',
-        cancelButtonText: 'Keep Last PI',
+        cancelButtonText: 'Keep',
         cancelButtonColor: '#414141',
         customClass: 'sweet-alert-modal',
         background: '#292929'
