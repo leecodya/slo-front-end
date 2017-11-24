@@ -8,6 +8,11 @@
   <aside>
     <h1>Edit this SLO</h1>
     <p>Use this form to modify a Student Learning Objective.</p>
+    <button *ngIf="selectedSLO" type="button" (click)="toggleArchiveSLO()" class="button" [disabled]="archiveLoading" [ngClass]="{ 'loading': archiveLoading }">
+      <img *ngIf="archiveLoading" src="assets/Rolling.gif" />
+      <span *ngIf="!archiveLoading && selectedSLO.archived">Unarchive SLO</span>
+      <span *ngIf="!archiveLoading && !selectedSLO.archived">Archive SLO</span>
+    </button>
   </aside>
 
   <div class="content cf">

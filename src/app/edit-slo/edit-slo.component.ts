@@ -18,6 +18,7 @@ export class EditSLOComponent implements OnInit {
   selectedSLO: SLO;
   editSLOForm: FormGroup;
   submitLoading: Boolean; //tracks when form submit button is pressed to show loading indicator
+  archiveLoading: Boolean;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -197,6 +198,21 @@ export class EditSLOComponent implements OnInit {
           });
         }
     });
+  }
+
+  toggleArchiveSLO() {
+    this.archiveLoading = true;
+    this.sloService.toggleArchive(this.selectedSLO).subscribe(
+      data => {
+        this.selectedSLO = data;
+        this.archiveLoading = false;
+      },
+      error => {
+        this.alertService.error(error.json().message);
+        console.log(error.json());
+        this.archiveLoading = false;
+      }
+    )
   }
 
 }

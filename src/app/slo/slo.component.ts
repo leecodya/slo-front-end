@@ -82,7 +82,6 @@ export class SLOComponent implements OnInit {
   }
 
   submit(formValue) {
-    console.log(formValue);
     this.submitLoading = true;
 
     if (this.newSLOForm.valid) {

@@ -63,6 +63,12 @@ export class SLOService {
         });
     }
 
+    toggleArchive(slo: SLO) {
+        return this.http.post(this._baseURL + `/slo/${slo.slo_id}/archive`, null, this.helperService.jwt()).map((res: Response) => {
+            return new SLO(res.json());
+        });
+    }
+
     getReport(report_type, year) {
         console.log(report_type);
         if (report_type !== 'courses' && report_type !== 'slos') {
