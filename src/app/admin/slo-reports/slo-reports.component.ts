@@ -16,11 +16,15 @@ export class SLOReportsComponent implements OnInit {
     slos: SLO[];    
     formLoading: Boolean = false;
     selectedSLOId: String;
+    selectedSLOYear: String;
     selectedSLO: SLO;
     selectedSLOGraphData = null; // Holds both Online/F2F info
     selectedSLOF2FGraphData = null; //Just F2F Info
     selectedSLOONLINEGraphData = null; // Just ONLINE Info
     componentLoading: Boolean = true;
+    
+    @Input()
+    uniqueYears: Set<Date>;
 
     config: any = {
         showXAxis: true,
@@ -51,9 +55,11 @@ export class SLOReportsComponent implements OnInit {
                 
                 if (this.slos.length > 0) {
                     this.selectedSLO = this.slos[0];
-                    this.loadSLO(this.selectedSLO);
+                    this.selectedSLOYear = "All Years";
+                    this.loadSLO(this.selectedSLO, null);
                     this.selectedSLOId = this.slos[0].slo_id;
                 } else {
+                    this.selectedSLOYear = "All Years";
                     this.selectedSLO = new SLO(); // initialize with empty course
                 }
 
@@ -67,18 +73,18 @@ export class SLOReportsComponent implements OnInit {
         
     }
 
-    loadSelectedSLO(event: Event) {
-        let slo_id = (<HTMLInputElement>event.target).value;
-        this.selectedSLO = this.slos.find(x => x.slo_id == slo_id);
-        this.loadSLO(this.selectedSLO);
+    loadSelectedSLO() {
+        this.selectedSLO = this.slos.find(x => x.slo_id == this.selectedSLOId);
+        let year = this.selectedSLOYear == "All Years" ? null : this.selectedSLOYear;
+        this.loadSLO(this.selectedSLO, year);
     }
 
-    loadSLO(slo: SLO) {
+    loadSLO(slo: SLO, year) {
         this.formLoading = true;
         let sloRequests = [
-            this.graphDataService.getSLOData(slo),
-            this.graphDataService.getSLOData(slo, "F2F"),
-            this.graphDataService.getSLOData(slo, "ONLINE")
+            this.graphDataService.getSLOData(slo, null, year),
+            this.graphDataService.getSLOData(slo, "F2F", year),
+            this.graphDataService.getSLOData(slo, "ONLINE", year)
         ];
 
         Observable.forkJoin(sloRequests).subscribe(

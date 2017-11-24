@@ -72,5 +72,5 @@
   </div>
   
   <app-class-reports [courses]="courses" *ngIf="currentSection == 'Class Reports'"></app-class-reports>
-  <app-slo-reports *ngIf="currentSection == 'SLO Reports'"></app-slo-reports>
+  <app-slo-reports [uniqueYears]="uniqueYears" *ngIf="currentSection == 'SLO Reports'"></app-slo-reports>
 </section>

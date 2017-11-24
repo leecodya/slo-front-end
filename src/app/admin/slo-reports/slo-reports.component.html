@@ -1,7 +1,11 @@
 <aside>
     <h1>SLO Reports</h1>
     <p>To view aggregate reports for each SLO, select a SLO below. This will pull assessments from classes that are still in-complete.</p>
-    <select class="slo-selector" name="slo-selector" [disabled]="formLoading" [(ngModel)]="selectedSLOId" (change)="loadSelectedSLO($event)">
+    <select class="slo-year-selector" [disabled]="formLoading" [(ngModel)]="selectedSLOYear" (change)="loadSelectedSLO()">
+        <option value="All Years" selected="selected">All Years</option>
+        <option *ngFor="let year of uniqueYears" [value]="year">{{ year }}</option>
+    </select>
+    <select class="slo-selector" name="slo-selector" [disabled]="formLoading" [(ngModel)]="selectedSLOId" (change)="loadSelectedSLO()">
         <option *ngFor="let slo of slos" [value]="slo.slo_id">{{ slo.slo_id }} - {{ slo.slo_description }}</option>
     </select>
 </aside>
@@ -14,7 +18,7 @@
             <p class="subtext">Total Assessments</p>
         </div>
         <h3 class="course-title">{{ (selectedSLO.slo_description.length > 60) ? (selectedSLO.slo_description | slice:0:60) + '...' : (selectedSLO.slo_description) }} </h3>
-        <p class="course-data"><span class="crn">SLO #{{ selectedSLO.slo_id }}</span></p>
+        <p class="course-data"><span class="crn">SLO #{{ selectedSLO.slo_id }} - {{ selectedSLOYear }}</span></p>
     </div>
 
     <div *ngIf="selectedSLOGraphData" class="graph-container top-most cf">

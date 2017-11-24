@@ -20,10 +20,14 @@ export class GraphDataService {
         });
     }
 
-    getSLOData(slo: SLO, filter_by=null) {
+    getSLOData(slo: SLO, filter_by=null, year=null) {
         let paramString = '';
-        if (filter_by) {
-            paramString = `?filter_by=${filter_by}`
+        if (filter_by && year) {
+            paramString = `?filter_by=${filter_by}&year=${year}`;
+        } else if (filter_by) {
+            paramString = `?filter_by=${filter_by}`;
+        } else if (year) {
+            paramString = `?year=${year}`;
         }
 
         return this.http.get(this._baseURL + `/data/slo/${slo.slo_id}${paramString}`, this.helperService.jwt()).map((res: Response) => {
