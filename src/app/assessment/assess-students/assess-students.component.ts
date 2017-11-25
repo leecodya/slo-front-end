@@ -77,6 +77,7 @@ export class AssessStudentsComponent implements OnInit {
     }
 
     save(goToNextStudent?: Boolean) {
+      console.log(this.form);
       this.formLoading = true;
       let assessmentBatch = [];
       this.form.forEach(individualAssessment => {
@@ -193,6 +194,12 @@ export class AssessStudentsComponent implements OnInit {
     }
 
     validateInput(event, pi) {
+      if (event.target.value.length > 1) { //should never be called, since we added maxlength="1" to the input. Just in-case
+        event.target.value = event.target.value.substring(0, 1);
+        pi.score = event.target.value.substring(0, 1);
+        event.target.select();
+      }
+      
       let num = parseInt(event.target.value);
       
       if (!num) {

@@ -40,7 +40,7 @@
                             <td>{{ pi_rubric.exemplary_description }}</td>
                         </tr>
                     </table><!--
-                --><div class="input-wrapper"><input [id]="pi.performance_indicator_id" [name]="pi.performance_indicator_id" [(ngModel)]="pi.score" autocomplete="off" (keyup)="validateInput($event, pi)" (change)="validateInput($event, pi)" (focus)="showRubric($event)" (blur)="hideRubric($event)" type="text"></div>
+                --><div class="input-wrapper"><input [id]="pi.performance_indicator_id" [name]="pi.performance_indicator_id" [(ngModel)]="pi.score" autocomplete="off" (keyup)="validateInput($event, pi)" maxlength="1" (change)="validateInput($event, pi)" (focus)="showRubric($event)" (blur)="hideRubric($event)" type="text"></div>
             </div>
         </div>
 
