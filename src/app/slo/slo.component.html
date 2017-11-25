@@ -56,7 +56,7 @@
       </div>
 
       <div class="pi-indicators">
-        <div formArrayName="performance_indicators" *ngFor="let item of newSLOForm.get('performance_indicators').controls; let i = index;" class="pi-indicator-section cf">
+        <div formArrayName="performance_indicators" *ngFor="let item of sloPIControlsArray(); let i = index;" class="pi-indicator-section cf">
             <div class="section-header">{{ newSLOForm.controls['slo_id'].value }}-{{ item.controls['performance_indicator_id'].value }} Performance Indicator <button type="button" (click)="removePI(i)">(Delete this performance indicator)</button></div>
           <div class="pi-group-wrapper cf" [formGroupName]="i">
             <div class="form-group pi-desc">

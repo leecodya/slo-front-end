@@ -81,6 +81,10 @@ export class SLOComponent implements OnInit {
     items.push(this.createPIFormGroup());
   }
 
+  sloPIControlsArray() {
+    return (<any>this.newSLOForm.get('performance_indicators')).controls;
+  }
+
   submit(formValue) {
     this.submitLoading = true;
 
@@ -94,7 +98,7 @@ export class SLOComponent implements OnInit {
       let slo = new SLO(formValue);
       this.sloService.createSLO(slo).subscribe(
         data => {
-          this.alertService.success("SLO successfully created.", true);
+          this.alertService.success("SLO successfully created.", false);
           this.submitLoading = false;
           this.router.navigate(['/slo', data.slo_id]);
         },

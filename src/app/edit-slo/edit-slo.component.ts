@@ -126,7 +126,7 @@ export class EditSLOComponent implements OnInit {
       let slo = new SLO(formValue);
       this.sloService.updateSLO(slo).subscribe(
         data => {
-          this.alertService.success("SLO successfully updated.", true);
+          this.alertService.success("SLO successfully updated.", false);
           this.initializeForm(data);
           this.submitLoading = false;
           //this.router.navigate(['/slo', data.slo_id]);
@@ -198,6 +198,10 @@ export class EditSLOComponent implements OnInit {
           });
         }
     });
+  }
+
+  sloPIControlsArray() {
+    return (<any>this.editSLOForm.get('performance_indicators')).controls;
   }
 
   toggleArchiveSLO() {
