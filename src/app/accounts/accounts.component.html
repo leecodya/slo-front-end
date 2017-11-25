@@ -1,0 +1,39 @@
+<menu-bar></menu-bar>
+
+<section class="accounts cf">
+  <div class="section-header">
+    <a class="active">Edit Accounts</a>
+  </div>
+
+  <aside>
+    <h1>Edit Accounts</h1>
+    <p>Administrators can view, modify, and control exactly who has access to the Assessment Matrix using this page.</p>
+  </aside>
+
+  <div class="content cf">
+    <div *ngFor="let account of accounts" class="faculty-group" [ngClass]="{'admin': account.user_type == '1'}">
+      <div class="total">
+        <p>{{ account.total_courses | number:'2.0-0' }}</p>
+        <p class="subtext">Total Courses</p>
+      </div>
+      <h3 class="course-title">{{ account.first_name }} {{ account.last_name }} - {{ account.email }}</h3>
+      <p class="faculty-data">
+        <button class="button" (click)="resetPassword(account)">Reset Password</button>
+        <button class="button" (click)="deleteAccount(account)">Delete</button>
+        <button type="button" (click)="toggleAdmin(account)" class="button" [disabled]="makeAdminLoading" [ngClass]="{ 'loading': makeAdminLoading && selectedAccountID == account.id }">
+          <img *ngIf="makeAdminLoading && (selectedAccountID == account.id)" src="assets/Rolling.gif" />
+          <span *ngIf="!(makeAdminLoading && selectedAccountID == account.id) && account.user_type == '1'">Revoke Admin</span>
+          <span *ngIf="!(makeAdminLoading && selectedAccountID == account.id) && account.user_type == '0'">Grant Admin</span>
+        </button>
+      </p>
+    </div>
+  </div>
+
+  <div *ngIf="loadingAccounts" class="loader">
+      <p class="loading-text">Loading account data...</p>
+      <div id="progress-bar">
+          <div id="loadingAccountsG_1" class="progress-bar"></div>
+      </div>
+  </div>
+
+</section>

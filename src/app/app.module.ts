@@ -27,6 +27,7 @@ import { SLOReportsComponent } from './admin/slo-reports/slo-reports.component';
 import { AdminComponent } from './admin/admin.component';
 import { SLOComponent } from './slo/slo.component';
 import { EditSLOComponent } from './edit-slo/edit-slo.component';
+import { AccountsComponent } from './accounts/accounts.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EditSLOComponent } from './edit-slo/edit-slo.component';
     ClassReportsComponent,
     SLOReportsComponent,
     SLOComponent,
-    EditSLOComponent
+    EditSLOComponent,
+    AccountsComponent
   ],
   imports: [
     BrowserModule,

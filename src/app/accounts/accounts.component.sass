@@ -1,0 +1,59 @@
+@import 'variables'
+
+.accounts
+
+    .faculty-group
+        display: block
+        border: 1px solid $c-form-border
+        margin-left: 20px
+        margin-bottom: 20px
+        padding: 20px 20px
+        border-radius: 15px
+        transition: all .2s ease
+
+        &.admin
+            border: 1px solid rgba(255, 255, 255, .7)
+
+        h3
+            font-family: $f
+            font-size: 16px
+            font-weight: 500
+            color: rgba(255, 255, 255, .9)
+        
+        .total
+            font-family: $f
+            font-size: 20px
+            float: right
+            color: rgba(255, 255, 255, .9)
+            font-weight: 500
+            text-align: right
+
+            .subtext
+                font-size: 12px
+                color: rgba(255, 255, 255, .5)
+                font-weight: 400
+                font-style: italic
+                margin-top: 5px
+        
+        .faculty-data
+            margin-top: 10px
+
+            .button
+                padding: 5px 10px
+                font-family: $f
+                font-weight: 400
+                margin-right: 7px
+                font-size: 12px
+                color: rgba(255, 255, 255, .9)
+                background-color: $c-form-bg
+
+                &.loading
+                    position: relative
+                    top: 2px
+                    padding: 4px 10px
+
+                img
+                    width: 14px
+
+                &:hover, &:focus, &:active
+                    background-color: $c-button

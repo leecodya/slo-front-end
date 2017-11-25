@@ -31,11 +31,13 @@ export class Assessment {
 }
 
 export class Faculty {
+    id: number;
     faculty_id: String;
     email: String;
     first_name: String;
     last_name: String;
     user_type: String;
+    total_courses?: Number; // mostly on the /account, /accounts, and /resetpassword endpoints
 
     constructor(init?: Partial<Faculty>) {
         Object.assign(this, init);

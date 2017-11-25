@@ -17,6 +17,36 @@ export class FacultyService {
             return new Faculty(res.json());
         });
     }
+
+    getAllFaculty() {
+        return this.http.get(this._baseURL + '/accounts', this.helperService.jwt()).map((res: Response) => {
+            let facultyList: Faculty[] = [];
+
+            for (let faculty of res.json()) {
+                facultyList.push(new Faculty(faculty));
+            }
+
+            return facultyList;
+        });
+    }
+
+    toggleAdmin(faculty: Faculty) {
+        faculty.user_type = faculty.user_type == '0' ? '1' : '0';
+
+        return this.http.put(this._baseURL + `/account/${faculty.id}`, faculty, this.helperService.jwt()).map((res: Response) => {
+            return new Faculty(res.json());
+        });
+    }
+
+    resetPassword(faculty: Faculty, newPassword: string) {
+        let passwordData = {
+            password: newPassword
+        };
+
+        return this.http.post(this._baseURL + `/resetpassword/${faculty.id}`, passwordData, this.helperService.jwt()).map((res: Response) => {
+            return new Faculty(res.json());
+        });
+    }
     
     register(faculty: Faculty, password: String) {
         let facultyData = {
@@ -29,6 +59,12 @@ export class FacultyService {
 
         return this.http.post(this._baseURL + '/register', facultyData).map((res: Response) => {
             return new Faculty(res.json());
+        });
+    }
+
+    removeAccount(account: Faculty) {
+        return this.http.delete(this._baseURL + `/account/${account.id}`, this.helperService.jwt()).map((res: Response) => {
+            return res;
         });
     }
 
