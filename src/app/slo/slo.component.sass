@@ -104,6 +104,22 @@
 
         &:focus
             background-color: $c-button
+        
+        &::placeholder //default
+            color: rgba(255, 255, 255, .6)
+        
+        &::-webkit-input-placeholder //chrome, safari
+            color: rgba(255, 255, 255, .6)
+            font-weight: 400
+        
+        &::-moz-placeholder //FireFox
+            color: rgba(255, 255, 255, .6)
+        
+        &:-ms-input-placeholder //IE 11
+            color: rgba(255, 255, 255, .6)
+        
+        &::-ms-input-placeholder //Edge
+            color: rgba(255, 255, 255, .6)
     
     .button-group
         margin-top: 30px
