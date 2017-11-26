@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CourseService, AlertService } from '../_services';
 import { Course } from '../_models';
 import { AddStudentsComponent } from './add-students/add-students.component';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-assessment',
@@ -13,7 +14,6 @@ export class AssessmentComponent implements OnInit {
   course: Course = new Course();
   loadingCourse: Boolean = true;
   currentSection = 'Add Students';
-  deleteCourseConfirm: Boolean = false;
 
   constructor(
     private router: Router,
@@ -45,19 +45,33 @@ export class AssessmentComponent implements OnInit {
   }
 
   deleteCourse() {
-    if (!this.deleteCourseConfirm) {
-      this.deleteCourseConfirm = true;
-      return;
-    }
+    let that = this;
 
-    this.courseService.deleteCourse(this.course).subscribe(
-      data => {
-        this.router.navigate(['/home']);
-      },
-      error => {
-        console.log(error);
+    swal({
+      title: `Delete this course?`,
+      text: "This cannot be undone, and you will lose all students entered and assessments completed for this course.",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete Course',
+      confirmButtonColor: '#623890',
+      cancelButtonText: 'Keep Course',
+      cancelButtonColor: '#414141',
+      customClass: 'sweet-alert-modal',
+      background: '#292929'
+    }).then(function (result) {
+      if (result.value) {
+        that.courseService.deleteCourse(that.course).subscribe(
+          data => {
+            that.alertService.success('Course successfully deleted.', true);
+            that.router.navigate(['/home']);
+          },
+          error => {
+            that.alertService.error(error.json().message);
+            console.log(error);
+          }
+        );
       }
-    );
+    });
   }
 
   updateCourse() {

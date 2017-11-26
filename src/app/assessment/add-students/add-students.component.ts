@@ -13,10 +13,12 @@ import swal from 'sweetalert2';
 
 export class AddStudentsComponent implements OnInit {
     form;
+    studentsBatchExcelFile = "";
 
     loadingAssessments: Boolean = true;
     assessments: Assessment[] = [];
     formLoading: Boolean = false;
+    batchLoading: Boolean = false;
 
     @Input()
     course: Course;
@@ -80,6 +82,62 @@ export class AddStudentsComponent implements OnInit {
                 }, 300)
             }
         }
+    }
+
+    changeListener(event) : void {
+        this.readThis(event.target);
+    }
+      
+    readThis(inputValue: any): void {
+        var file:File = inputValue.files[0];
+        if (file.size/1024 > 500) {
+            this.alertService.error("File cannot be more than 500 kb in size");
+            return;
+        }
+        var myReader:FileReader = new FileReader();
+        
+        myReader.onloadend = (e) => {
+            this.studentsBatchExcelFile = myReader.result.split(',')[1];
+        }
+        myReader.readAsDataURL(file);
+    }
+
+    showHelp() {
+        swal({
+            title: 'Example Batch File',
+            text: `Please ensure your excel file is in the format shown above. 
+            The data must be on the first sheet, and the header row will be ignored. 
+            Order is important. Extra columns, sheets, and data in the file will be ignored.`,
+            imageUrl: './assets/example-batch-file.png',
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'Example batch file',
+            customClass: 'sweet-alert-modal',
+            background: '#292929'
+        });
+    }
+
+    batchLoadStudents() {
+        if (this.studentsBatchExcelFile.length == 0) {
+            this.alertService.error("Please upload a valid file first.");
+            return;
+        }
+
+        this.batchLoading = true;
+        this.studentService.batchLoadStudents(this.studentsBatchExcelFile, this.course).subscribe(
+            data => {
+                this.change.emit(true);
+                setTimeout(() => {
+                    this.batchLoading = false;
+                    this.alertService.success("Students successfully added.");
+                }, 1000);
+            },
+            error => {
+                this.batchLoading = false;
+                this.alertService.error(error.json().message);
+                console.log(error);
+            }
+        );
     }
 
     removeStudentConfirm(student: Student, course: Course) {

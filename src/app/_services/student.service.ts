@@ -30,4 +30,18 @@ export class StudentService {
             return new Student(res.json());
         });
     }
+
+    batchLoadStudents(excelBase64Encoded, course: Course) {
+        let data = { file: excelBase64Encoded };
+
+        return this.http.post(this._baseURL + `/students/batch/${course.crn}`, data, this.helperService.jwt()).map((res: Response) => {
+            let students: Student[] = [];
+
+            for (let student of res.json()) {
+                students.push(new Student(student));
+            }
+
+            return students;
+        })
+    }
 }

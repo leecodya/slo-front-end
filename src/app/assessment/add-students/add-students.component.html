@@ -3,6 +3,11 @@
     <p>To assess your students, first add them to your class. When you have added all your students, press next below.</p>
     <p>Pro-tip: Use the enter key to add the student and start from the beginning.</p>
     <button class="button" (click)="nextSection()">Next - Assess Your Students</button>
+    
+    <label>Batch Upload Students</label>
+    <input type="file" class="file-input" accept=".xlsx, .xls" (change)="changeListener($event)">
+    <button type="button" class="button batch-upload" (click)="batchLoadStudents()" [disabled]="batchLoading" [ngClass]="{ 'loading': batchLoading }"><img *ngIf="batchLoading" src="assets/Rolling.gif" /><span *ngIf="!batchLoading">Go</span></button>
+    <span class="help" (click)="showHelp()">Need help?</span>
 </aside>
 
 <div class="content cf">
@@ -14,17 +19,17 @@
                 <div *ngIf="form.hasError('student_id')" class="error">9 digit number</div>
             </div>
             <div class="form-group">
-                <label for="last_name">Last Name</label>
-                <input type="text" formControlName="last_name" placeholder="Smith" size="11">
-                <div *ngIf="form.hasError('last_name')" class="error">required</div>
-            </div>
-            <div class="form-group">
                 <label for="first_name">First Name</label>
                 <input type="text" formControlName="first_name" placeholder="John" size="11">
                 <div *ngIf="form.hasError('first_name')" class="error">required</div>
             </div>
             <div class="form-group">
-                <button type="submit" class="button" [disabled]="formLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Submit</span></button>
+                <label for="last_name">Last Name</label>
+                <input type="text" formControlName="last_name" placeholder="Smith" size="11">
+                <div *ngIf="form.hasError('last_name')" class="error">required</div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="button" [disabled]="formLoading || batchLoading" [ngClass]="{ 'loading': formLoading }"><img *ngIf="formLoading" src="assets/Rolling.gif" /><span *ngIf="!formLoading">Submit</span></button>
             </div>
         </div>
     </form>

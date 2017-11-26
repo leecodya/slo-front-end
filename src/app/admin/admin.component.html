@@ -39,7 +39,7 @@
 
   <aside>
     <h1>View Faculty Progress</h1>
-    <p>These are the current classes in progress by the various faculty members. <span class="highlight">Highlighted</span> classes are in-complete.</p>
+    <p>These classes are in progress by the various faculty members for {{ faculty_progress_year }}. <span class="highlight">Highlighted</span> classes are incomplete.</p>
     <select name="faculty_progress_year" [(ngModel)]="faculty_progress_year" (change)="updateFacultyProgress()">
       <option *ngFor="let year of uniqueYears" [value]="year">{{ year }}</option>
     </select>
@@ -52,7 +52,7 @@
         <p class="subtext">Total Courses</p>
       </div>
       <h3 class="course-title">{{ faculty.first_name }} {{ faculty.last_name }}</h3>
-      <p class="courses"><span *ngFor="let course of getFacultyCourses(faculty); let isLast = last" [ngClass]="{ 'complete' : course.completion }">{{ course.course_type }} {{ course.course_number }}{{ isLast ? '' : ', ' }}</span></p>
+      <p class="courses"><span *ngFor="let course of getFacultyCourses(faculty); let isLast = last" [routerLink]="['/assessment', course.crn]" [ngClass]="{ 'complete' : course.completion }">{{ course.course_type }} {{ course.course_number }}{{ isLast ? '' : ', ' }}</span></p>
     </div>
   </div>
 

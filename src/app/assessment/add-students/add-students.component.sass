@@ -1,8 +1,44 @@
 @import 'variables'
 
-aside button
-    margin-top: 30px
-    color: white
+aside 
+    button
+        margin-top: 30px
+        color: white
+
+        &.loading
+            padding: 11px 20px
+
+        img
+            width: 18px
+    
+    .file-input
+        border: 1px solid $c-form-border
+        width: 200px
+        padding: 8px 0
+        margin-right: 15px
+        vertical-align: top
+    
+    label
+        font-family: $f
+        color: rgba(255, 255, 255, .7)
+        font-size: 12px
+        display: block
+        margin-bottom: 10px
+        margin-top: 30px
+    
+    .help
+        display: block
+        font-size: 12px
+        font-style: italic
+        color: rgba(255, 255, 255, .5)
+        margin-top: 5px
+
+        &:hover, &:focus
+            cursor: pointer
+            text-decoration: underline
+    
+    .batch-upload
+        margin-top: 0
 
 .new-student-form
     float: right
