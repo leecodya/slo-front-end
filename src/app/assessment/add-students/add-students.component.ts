@@ -113,7 +113,8 @@ export class AddStudentsComponent implements OnInit {
             imageHeight: 200,
             imageAlt: 'Example batch file',
             customClass: 'sweet-alert-modal',
-            background: '#292929'
+            background: '#292929',
+            confirmButtonColor: '#623890'
         });
     }
 
@@ -181,6 +182,7 @@ export class AddStudentsComponent implements OnInit {
                 console.log("Removed Student");
             },
             error => {
+                this.alertService.error(error.json().message);
                 console.log(error);
             }
         );
@@ -201,7 +203,11 @@ export class AddStudentsComponent implements OnInit {
                     this.formLoading = false;
                 }, 300);
             },
-            error => { console.log(error) }
+            error => {
+                this.formLoading = false;
+                this.alertService.error(error.json().message);
+                console.log(error);
+            }
         );
     }
 

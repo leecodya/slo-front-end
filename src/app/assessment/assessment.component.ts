@@ -32,7 +32,8 @@ export class AssessmentComponent implements OnInit {
           this.course = data;
           this.loadingCourse = false;
         },
-        error => { 
+        error => {
+          this.alertService.error(error.json().message);
           console.log(error);
           this.loadingCourse = false;
         }

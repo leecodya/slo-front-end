@@ -70,7 +70,12 @@ export class AssessStudentsComponent implements OnInit {
       if (changes['course'] && ! changes['course'].isFirstChange()) {
           this.course = changes['course'].currentValue;
       }
-   }
+    }
+
+    studentAssessed(student): Boolean {
+      let existingAssessment = this.assessments.filter(x => x.student.student_id == student.student_id);
+      return existingAssessment.length > 0 ? true : false;
+    }
 
     nextSection() {
       this.advanceSection.emit(true);
@@ -105,14 +110,14 @@ export class AssessStudentsComponent implements OnInit {
               goToNextStudent ? this.nextStudent() : null;
             },
             error => {
-              this.alertService.error(error);
+              this.alertService.error(error.json().message);
               console.log(error);
             }
           );
         },
         error => {
           this.formLoading = false;
-          this.alertService.error(error);
+          this.alertService.error(error.json().message);
           console.log(error);
         }
       );

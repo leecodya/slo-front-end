@@ -48,7 +48,7 @@ export class LeaveCommentsComponent implements OnInit {
                }, 3000);
            },
            error => {
-               this.alertService.error("Something went wrong.");
+               this.alertService.error(error.json().message);
                console.log(error);
                this.formLoading = false;
            }

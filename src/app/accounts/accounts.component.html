@@ -7,7 +7,7 @@
 
   <aside>
     <h1>Edit Accounts</h1>
-    <p>Administrators can view, modify, and control exactly who has access to the Assessment Matrix using this page.</p>
+    <p>Administrators can view, modify, and control who has access to the Assessment Matrix using this page.</p>
   </aside>
 
   <div class="content cf">
@@ -23,7 +23,7 @@
         <button type="button" (click)="toggleAdmin(account)" class="button" [disabled]="makeAdminLoading" [ngClass]="{ 'loading': makeAdminLoading && selectedAccountID == account.id }">
           <img *ngIf="makeAdminLoading && (selectedAccountID == account.id)" src="assets/Rolling.gif" />
           <span *ngIf="!(makeAdminLoading && selectedAccountID == account.id) && account.user_type == '1'">Revoke Admin</span>
-          <span *ngIf="!(makeAdminLoading && selectedAccountID == account.id) && account.user_type == '0'">Grant Admin</span>
+          <span *ngIf="!(makeAdminLoading && selectedAccountID == account.id) && account.user_type == '0'">Promote to Admin</span>
         </button>
       </p>
     </div>

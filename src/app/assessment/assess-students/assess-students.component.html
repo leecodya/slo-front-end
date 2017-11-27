@@ -10,7 +10,7 @@
         <div class="current-student">
             <label for="active-student">Currently Assessing</label>
             <select name="active-student" [disabled]="formLoading" [(ngModel)]="selectedStudentId" (change)="loadSelectedStudent($event)">
-                <option *ngFor="let student of course.students" [value]="student.student_id">{{ student.student_id }} - {{ student.first_name }} {{ student.last_name }}</option>
+                <option *ngFor="let student of course.students" [value]="student.student_id">{{studentAssessed(student) ? '✔' : '✖' }} {{ student.student_id }} - {{ student.first_name }} {{ student.last_name }}</option>
             </select>
         </div>
         <div *ngFor="let slo of form" class="form-row">
